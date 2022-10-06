@@ -1,0 +1,291 @@
+{
+  "accidental_damage_cover": [
+    [{"LOWER": "buildings"}, {}, {"LOWER": "accidental"}, {}, {"LOWER": "damage"}],
+    [{"LOWER": "accidental"}, {"LOWER": "damage"}, {}, {"LOWER": "buildings"}],
+    [{"LOWER": "accidental"}, {"LOWER": "damage"}, {}, {"LOWER": "cover"}],
+    [{"LOWER": "accidental"}, {"LOWER": "breakage"}],
+    [{"LOWER": "buildings"}, {"LOWER": "accidental"}, {"LOWER": "damage"}, {"LOWER": "option", "OP": "?"}]
+  ],
+
+  "alternative_accommodation":[
+    [{"LEMMA": "alternative"}, {"LEMMA": "accommodation"}]
+  ],
+
+  "building": [
+    [{"LOWER": "building", "IS_TITLE": "True", "POS": "NOUN"}],
+    [{"LEMMA": "building", "IS_TITLE": "True", "POS": "NOUN"}, {"LOWER": "option", "IS_TITLE": "True", "POS": "PROPN"}]
+  ],
+
+  "business_records": [
+    [{"LOWER": "business", "IS_TITLE": "True", "POS": "NOUN"}, {"LEMMA": "record"}]
+  ],
+
+  "ceremonial_occasions": [
+    [{"LOWER": "birth"}, {"LOWER": "child"}, {"POS": "PUNCT", "OP": "?"}, {"LOWER": "religious"}, {"LEMMA": "festival"}]
+  ],
+
+  "contents_temporarily_away": [
+    [{"LOWER": "contents"}, {"LOWER": "temporarily"}, {"LOWER": "away"}, {"LOWER": "home"}]
+  ],
+
+  "debris_removal": [
+    [{"LOWER": "debris"}, {"LOWER": "removal"}]
+  ],
+
+  "dwellings": [
+    [{"LEMMA": "owner"}, {"LOWER": "dwelling"}]
+  ],
+
+  "earthquake_coverage": [
+    [{"LEMMA": "earthquake"}, {"LEMMA": "coverage"}]
+  ],
+
+  "emergency_access": [
+    [{"LOWER": "emergency"}, {}, {"LOWER": "access"}],
+    [{"LOWER": "emergency"}, {"LOWER": "access"}]
+  ],
+
+  "employee_compensation_coverage": [
+    [{"LEMMA": "employee"}, {"LEMMA": "compensation"}, {"LEMMA": "coverage"}]
+  ],
+
+  "employers_liability": [
+    [{"LOWER": "employer"}, {"POS": "PART", "OP": "?"}, {"LEMMA": "liability"}]
+  ],
+
+  "engineering": [
+    [{"LOWER": "engineering", "IS_TITLE": "True", "POS": "PROPN"}]
+  ],
+
+  "escape_water": [
+    [{"LOWER": "water"}, {"LOWER": "oil"}, {"LOWER": "escaping"}]
+  ],
+
+  "fine_arts": [
+    [{"LOWER": "fine"}, {"LOWER": "arts"}]
+  ],
+
+  "flood_coverage": [
+    [{"LEMMA": "flood"}, {"LEMMA": "coverage"}],
+    [{"LOWER": "storm"}, {"LOWER": "flood"}]
+  ],
+
+  "garden_cover": [
+    [{"LOWER": "garden"}, {"LOWER": "cover"}]
+  ],
+
+  "glass_coverage": [
+    [{"LEMMA": "Glass"}, {"LEMMA": "coverage"}]
+  ],
+
+  "guest_belongings": [
+    [{"LOWER": "guests"}, {"POS": "PART", "OP": "?"}, {"LEMMA": "belonging"}]
+  ],
+
+  "home_alterations_coverage": [
+    [{"LEMMA": "alteration"}, {}, {}, {"LEMMA": "home"}]
+  ],
+
+  "home_contents_cover": [
+    [{"LEMMA": "Home"}, {}, {}, {"LEMMA": "Home"}],
+    [{"LEMMA": "content", "IS_TITLE": "True", "POS": "NOUN"}, {"LOWER": "option", "IS_TITLE": "True", "POS": "PROPN"}]
+  ],
+
+  "home_coverage":  [
+    [{"LOWER": "home"}, {"LOWER": "and"}, {"LOWER": "detached"}, {"IS_PUNCT": "True", "OP": "?"}, {"LOWER": "coverages"}],
+    [{"LOWER": "home"}, {"LOWER": "and"}, {"LOWER": "detached"}, {"LOWER": "coverages"}]
+  ],
+
+  "home_emergency_cover": [
+    [{"LEMMA": "Home"}, {}, {}, {"LEMMA": "Emergency"}, {"LEMMA": "Assistance"}],
+    [{"LOWER": "home"}, {"LEMMA": "Emergency"}, {"LEMMA": "Assistance"}],
+    [{"LOWER": "home"}, {"LOWER": "emergency"}, {"LOWER": "cover"}],
+    [{"LOWER": "home"}, {"LOWER": "emergency"}]
+  ],
+
+  "home_office": [
+    [{"LEMMA": "home"}, {"LEMMA": "office"}, {"LEMMA": "content"}]
+  ],
+
+  "home_sale_coverage": [
+    [{"LEMMA": "sale"}, {}, {}, {"LEMMA": "home"}],
+    [{"LEMMA": "sell"}, {"LEMMA": "home"}]
+  ],
+
+  "hunter": [
+    [{"LOWER": "hunter", "IS_TITLE": "True", "POS": "PROPN"}]
+  ],
+
+  "identity_theft_coverage": [
+    [{"LEMMA": "identity"}, {"LEMMA": "theft"}, {"LEMMA": "coverage"}]
+  ],
+
+  "increased_cost_of_working": [
+    [{"LEMMA": "increase"}, {"LEMMA": "cost"}, {"LEMMA": "work"}]
+  ],
+
+  "increased_water_charges": [
+    [{"LOWER": "increased"}, {"LOWER": "water"}, {"LOWER": "charges"}]
+  ],
+
+  "leased_premises": [
+    [{"LEMMA": "lease"}, {"LEMMA": "premise"}]
+  ],
+
+  "legal_cover": [
+    [{"LOWER": "legal"}, {"LOWER": "cover"}],
+    [{"LEMMA": "legal"}, {"LEMMA": "liability"}]
+  ],
+
+  "legal_expenses": [
+    [{"LOWER": "legal"}, {"LOWER": "expenses"}]
+  ],
+
+  "lightning": [
+    [{"LOWER": "lightning", "IS_TITLE": "True"}]
+  ],
+
+  "loss_keys": [
+    [{"LOWER": "loss"}, {"LOWER": "keys"}],
+    [{"LOWER": "loss"}, {"LOWER": "theft"}, {"LOWER": "keys"}]
+  ],
+
+  "metered_water": [
+    [{"LOWER": "metered"}, {"LOWER": "water"}]
+  ],
+
+  "money": [
+    [{"LOWER": "money", "IS_TITLE": "True"}]
+  ],
+
+  "money_malicious_attack": [
+    [{"LOWER": "money"}, {"LOWER": "and", "OP": "?"}, {"LOWER": "malicious"}, {"LOWER": "attack"}]
+  ],
+
+  "pedal_cycle_cover": [
+    [{"LEMMA": "pedal"}, {"LEMMA": "cycle"}, {"LOWER": "cover"}],
+    [{"LOWER": "bicycle"}, {"LOWER": "cover"}],
+    [{"LOWER": "bicycles"}]
+  ],
+
+  "personal_belongings": [
+    [{"LEMMA": "personal"}, {"LEMMA": "belonging"}],
+    [{"LOWER": "personal"}, {"LOWER": "possessions"}]
+  ],
+
+  "personal_property_care_facility": [
+    [{"LEMMA": "personal"}, {"LEMMA": "property"}, {}, {}, {"LEMMA": "care"}, {"LEMMA": "facility"}]
+  ],
+
+  "property": [
+    [{"LOWER": "property", "IS_TITLE": "True", "POS": "NOUN"}]
+  ],
+
+  "property_liability": [
+    [{"LOWER": "property"}, {"LOWER": "owners"}, {"POS": "PUNCT", "OP": "?"}, {"LOWER": "liability"}]
+  ],
+
+  "removed_fixtures": [
+    [{"LOWER": "removed"}, {"LOWER": "fixtures"}, {"LOWER": "and"}, {"LOWER": "fittings"}]
+  ],
+
+  "rental_income_coverage": [
+    [{"LEMMA": "rental"}, {"LEMMA": "income"}, {"LEMMA": "coverage"}],
+    [{"LEMMA": "loss"}, {"LEMMA": "of"}, {"LEMMA": "rent"}],
+    [{"LEMMA": "loss"}, {"LEMMA": "rent"}],
+    [{"LOWER": "rent", "IS_TITLE": "True"}]
+  ],
+
+  "rented_home_coverage": [
+    [{"LEMMA": "rent"}, {"LEMMA": "home"}, {"LEMMA": "coverage"}]
+  ],
+
+  "replacement_locks_cover": [
+    [{"LOWER": "replacement"}, {}, {"LOWER": "locks"}],
+    [{"LOWER": "replacement"}, {"LOWER": "locks"}],
+    [{"LOWER": "lock"}, {"LOWER": "replacement"}]
+  ],
+
+  "retrieve_data": [
+    [{"LEMMA": "retrieve", "IS_TITLE": "True"}, {"LEMMA": " datum "}]
+  ],
+
+  "roof_leak_coverage": [
+    [{"LEMMA": "roof"}, {"LEMMA": "leak"}, {"LEMMA": "coverage"}]
+  ],
+
+  "seasonal_home_coverage": [
+    [{"LEMMA": "seasonal"}, {"LEMMA": "home"}, {"LEMMA": "coverage"}]
+  ],
+
+  "seasonal_home_theft_coverage": [
+    [{"LEMMA": "seasonal"}, {"LEMMA": "home"}, {"LEMMA": "theft"}, {"LEMMA": "coverage"}]
+  ],
+
+  "short_term_renter_coverage": [
+    [{"LEMMA": "short"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "term"}, {"LEMMA": "renter"}, {"LEMMA": "coverage"}],
+    [{"LEMMA": "short"}, {"LEMMA": "term"}, {"LEMMA": "renter"}, {"LEMMA": "coverage"}]
+  ],
+
+  "storage_coverage": [
+    [{"LEMMA": "storage"}, {"LEMMA": "coverage"}]
+  ],
+
+  "student_belongings": [
+    [{"LEMMA": "student"}, {"POS": "PART", "OP": "?"}, {"LEMMA": "belonging"}],
+    [{"LOWER": "contents"}, {"LOWER": "university"}]
+  ],
+
+  "tenant_improvement": [
+    [{"LEMMA": "tenant"}, {"POS": "PART", "OP": "?"}, {"LEMMA": "improvement"}]
+  ],
+
+  "tenant_liability": [
+    [{"LOWER": "tenant"}, {"POS": "PART", "OP": "?"}, {"LEMMA": "liability"}]
+  ],
+
+  "terrorism": [
+    [{"LOWER": "terrorism", "IS_TITLE": "True", "POS": "PROPN"}]
+  ],
+
+  "theft_contents": [
+    [{"LOWER": "theft"}, {"LOWER": "attempted"}, {"LOWER": "theft"}]
+  ],
+
+  "theft_outbuildings": [
+    [{"LOWER": "theft"}, {"LEMMA": "outbuilding"}]
+  ],
+
+  "theft_unattended_motor_vehicle": [
+    [{"LOWER": "theft"}, {"LOWER": "unattended"}, {"LOWER": "motor"}, {"LOWER": "vehicle"}]
+  ],
+
+  "trace_access_coverage": [
+    [{"LEMMA": "trace"}, {}, {"LEMMA": "access"}, {"LEMMA": "cover"}],
+    [{"LEMMA": "trace"}, {}, {"LEMMA": "access"}, {"LEMMA": "leak"}],
+    [{"LEMMA": "trace"}, {"LEMMA": "leak"}],
+    [{"LOWER": "trace"}, {"LOWER": "access"}]
+  ],
+
+  "under_construction_coverage": [
+    [{"LEMMA": "under"}, {"LEMMA": "construction"}, {"LEMMA": "coverage"}]
+  ],
+
+  "underground_service": [
+    [{"LEMMA": "underground"}, {}, {"LEMMA": "service"}],
+    [{"LEMMA": "underground"}, {"LEMMA": "service"}],
+    [{"LOWER": "damage"}, {}, {"LOWER": "underground"}, {"LOWER": "pipes"}]
+  ],
+
+  "undeveloped_land": [
+    [{"LEMMA": "undeveloped"}, {"LEMMA": "land"}]
+  ],
+
+  "vacancy_coverage": [
+    [{"LEMMA": "Vacancy"}, {"LEMMA": "coverage"}]
+  ],
+
+  "watercraft_coverage": [
+    [{"LEMMA": "Watercraft"}, {"LEMMA": "coverage"}]
+  ]
+}

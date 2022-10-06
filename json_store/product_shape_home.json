@@ -1,0 +1,70 @@
+{
+  "LINE": {
+    "ATTRIBUTES": [],
+    "ATTRIBUTE_CATEGORY": [],
+    "COVERAGE_CATEGORY": [
+    ]
+  },
+  "RISK_OBJECTS": [
+    {"NAME": "Structure", "TYPE": "risk_object", "LABEL":  "BuildingStructure",
+      "ATTRIBUTES": [
+        {"NAME": "Structure Type", "TYPE": "dropdown"},
+        {"NAME": "Number of Bedrooms", "TYPE" : "dropdown", "LABEL": "NumberBedrooms", "CATEGORY": "General", "LIST": "Number Bedrooms"},
+        {"NAME": "Number of Rooms", "TYPE" : "dropdown", "LABEL": "NumberRooms",  "CATEGORY": "General", "LIST": "Number Rooms"},
+        {"NAME": "Does the property have a cellar or basement", "TYPE": "boolean", "LABEL": "Basement", "CATEGORY": "General"},
+        {"NAME": "Does the property have a swimming pool", "TYPE": "boolean", "LABEL": "SwimmingPool", "CATEGORY": "General"},
+        {"NAME": "When was the property built?", "TYPE": "number", "LABEL":  "YearBuilt", "CATEGORY": "General"},
+        {"NAME": "What is the wall  construction?", "TYPE": "dropdown", "LABEL": "WallConstruction", "CATEGORY": "Construction", "LIST": "Wall Construction"},
+        {"NAME": "What is the roof construction?", "TYPE": "dropdown", "LABEL": "RoofConstruction", "CATEGORY": "Construction", "LIST": "Roof Construction"},
+        {"NAME": "What is the thatch material of your roof?", "TYPE": "text", "LABEL": "ThatchMaterial", "CATEGORY": "Construction"},
+        {"NAME": "Has the roof been sprayed with one of the following fire retardant sprays?", "TYPE": "dropdown", "LABEL": "ThatchSprayed", "CATEGORY": "Construction"},
+        {"NAME": "Year roof sprayed with fire retardant.", "TYPE": "date_time", "LABEL": "ThatchSprayedYear", "CATEGORY": "Construction"},
+        {"NAME": "Is the roof protected with Thatch Firewall?", "TYPE": "boolean", "LABEL": "ThatchFirewall", "CATEGORY": "Construction"},
+        {"NAME": "How many of each of the following heating types do you have in your home", "TYPE": "dropdown", "LABEL": "WallConstruction", "CATEGORY": "Construction"},
+        {"NAME": "Do you have any Woodburning or Multifuel stoves in your home?", "TYPE": "boolean", "LABEL": "WoodburningStoves", "CATEGORY": "Construction"},
+        {"NAME": "Heating type", "TYPE": "dropdown", "LABEL": "HeatingType", "CATEGORY": "Construction"},
+        {"NAME": "What material is the flue lined with?", "TYPE": "text", "LABEL": "FlueMaterial", "CATEGORY": "Construction"},
+        {"NAME": "Has a chimney heat detection system been fitted?", "TYPE": "boolean", "LABEL": "ChimneyDetectionSyste", "CATEGORY": "Construction"},
+        {"NAME": "Who Occupies the Property", "TYPE": "dropdown", "LIST": "Occupancy", "LABEL": "Occupancy", "CATEGORY": "Occupancy questions"},
+        {"NAME": "How long is the Property normally occupied", "TYPE": "dropdown", "LIST": "Occupied", "LABEL": "Occupied", "CATEGORY": "Occupancy questions"},
+        {"NAME": "What type of locks are the majority of external doors fitted with", "TYPE": "text", "LABEL": "DoorType", "CATEGORY": "Security"},
+        {"NAME": "Are all accessible windows, fanlights and skylights fitted with key operated locks?", "TYPE": "boolean", "LABEL":  "Window Locks", "CATEGORY": "Security"},
+        {"NAME": "Do you have CCTV at the property to be insured", "TYPE": "dropdown", "LIST": "Yes No", "LABEL": "CCTV", "CATEGORY": "Security"},
+        {"NAME": "Does the CCTV system have remote internet monitoring?", "TYPE": "boolean", "LABEL": "CCTVMonitoring", "CATEGORY": "Security"},
+        {"NAME": "Which areas are covered", "TYPE": "text", "LABEL": "CCTVAreaCovered", "CATEGORY": "Security"},
+        {"NAME": "Is there an intruder alarm in full and effective operation?", "TYPE": "dropdown", "LIST": "Yes No", "LABEL": "Alarm", "CATEGORY": "Security"},
+        {"NAME": "Is it maintained under contract by a registered installer?", "TYPE": "boolean", "LABEL": "AlarmInstallerMaintained", "CATEGORY": "Security"},
+        {"NAME": "Is there a police response or professional key holder response provided by the system?", "TYPE": "boolean", "LABEL": "AlarmResponse", "CATEGORY": "Security"},
+        {"NAME": "Have any of the buildings at the home, including the outbuildings:Suffered any structural damage, structural repair or underpinning?", "TYPE": "boolean", "LABEL": "StructuralRepair", "CATEGORY": "Subsidence Questions"},
+        {"NAME": "Have any of the buildings at the home, including the outbuildings:Any signs of internal or external cracks?", "TYPE": "boolean", "LABEL": "Cracking", "CATEGORY": "Subsidence Questions"},
+        {"NAME": "Have any of the buildings at the home, including the outbuildings: Been monitored for subsidence or movement?", "TYPE": "boolean", "LABEL": "Subsidence", "CATEGORY": "Subsidence Questions"}
+      ],
+      "RELATED": [
+        {"PARENT":  "What is the roof construction?", "CHILD": "What is the thatch material of your roof?", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "Has the roof been sprayed with one of the following fire retardant sprays?", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "Year roof sprayed with fire retardant.", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "Is the roof protected with Thatch Firewall?", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "How many of each of the following heating types do you have in your home", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "Do you have any Woodburning or Multifuel stoves in your home?", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "Heating type", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "What material is the flue lined with?", "LINK": "Thatch - Reed"},
+        {"PARENT":  "What is the roof construction?", "CHILD": "Has a chimney heat detection system been fitted?", "LINK": "Thatch - Reed"},
+        {"PARENT":  "Do you have CCTV at the property to be insured", "CHILD": "Does the CCTV system have remote internet monitoring?", "LINK": "Yes"},
+        {"PARENT":  "Do you have CCTV at the property to be insured", "CHILD": "Which areas are covered", "LINK": "Yes"},
+        {"PARENT":  "Is there an intruder alarm in full and effective operation?", "CHILD": "Is it maintained under contract by a registered installer?", "LINK": "Yes"},
+        {"PARENT":  "Is there an intruder alarm in full and effective operation?", "CHILD": "Is there a police response or professional key holder response provided by the system?", "LINK": "Yes"}
+      ],
+      "ATTRIBUTE_CATEGORY": [
+        {"NAME": "General", "TYPE": "attribute_category"},
+        {"NAME": "Construction", "TYPE": "attribute_category"},
+        {"NAME": "Occupancy questions", "TYPE": "attribute_category"},
+        {"NAME": "Security", "TYPE": "attribute_category"},
+        {"NAME": "Subsidence Questions", "TYPE": "attribute_category"}
+      ],
+      "COVERAGE_CATEGORY": [
+        {"NAME": "Primary Coverages", "TYPE": "clause_category"},
+        {"NAME": "Optional Coverages", "TYPE": "clause_category"}
+      ]
+    }
+  ]
+}

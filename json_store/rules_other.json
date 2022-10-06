@@ -1,0 +1,76 @@
+{
+  "building_base_coverage":  [
+    [{"LEMMA": "Building"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Base"}, {"LEMMA": "cover"}]
+  ],
+
+  "building_extended_coverage":  [
+    [{"LEMMA": "Building"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Extended"}, {"LEMMA": "Coverage"}]
+  ],
+
+  "building_roof_extension_coverage": [
+    [{"LEMMA": "Building"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Roof"}, {"LEMMA": "extension"}]
+  ],
+
+  "business_Interruption": [
+    [{"LEMMA": "Business"}, {"LEMMA": "Interruption"}]
+  ],
+
+  "business_travel": [
+    [{"LEMMA": "Business"}, {"LEMMA": "Travel"}]
+  ],
+
+  "commercial_legal_expenses": [
+    [{"LEMMA": "commercial"}, {"LEMMA": "Legal"}, {"LEMMA": "expense"}]
+  ],
+
+  "contractor_all_risks": [
+    [{"LEMMA": "contractor"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "all"}, {"LEMMA": "risk"}]
+  ],
+
+  "employer_liability": [
+    [{"LEMMA": "Employers"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Liability"}]
+  ],
+
+  "environmental_liability": [
+    [{"LEMMA": "Environmental"}, {"LEMMA": "Liability"}]
+  ],
+
+  "extended_coverage":[
+      [{"LEMMA": "Extended"}, {"LEMMA": "Coverage"}],
+      [{"LEMMA": "Coverage"}, {"LEMMA": "Extensions"}]
+  ],
+
+  "goods_in_transit": [
+    [{"LEMMA": "good"}, {"LEMMA": "in"}, {"LEMMA": "Transit"}]
+  ],
+
+  "group_personal_accident": [
+    [{"LEMMA": "Group"}, {"LEMMA": "Personal"}, {"LEMMA": "Accident"}]
+  ],
+
+  "home_assistance": [
+    [{"IS_PUNCT": "True", "OP": "?"}, {"LOWER": "home"}, {"IS_PUNCT": "True", "OP": "?"}, {"LOWER": "assistance"}]
+  ],
+
+  "household_basic_coverage": [
+    [{"LEMMA": "Household"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Basic"}, {"LEMMA": "Coverage"}]
+  ],
+
+  "household_blanket_coverage": [
+    [{"LEMMA": "Household"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Blanket"}, {"LEMMA": "Coverage"}]
+  ],
+
+  "household_extended_coverage": [
+    [{"LEMMA": "Household"}, {"IS_PUNCT": "True", "OP": "?"}, {"LEMMA": "Extended"}, {"LEMMA": "Coverage"}]
+  ],
+
+  "private_civil_liability": [
+    [{"LEMMA": "private"}, {"LEMMA": "civil"}, {"LEMMA": "Liability"}]
+  ],
+
+  "public_liability":[
+      [{"LOWER": "public"}, {"LOWER": "liability"}],
+      [{"LOWER": "liability"}, {}, {}, {"LOWER": "public"}]
+  ]
+}
+

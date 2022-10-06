@@ -1,0 +1,33 @@
+{
+  "Risk Object": [
+    {"NAME": "Vehicle", "TYPE": "risk_object", "LABEL": "Vehicle"}
+  ],
+  "Attributes": [
+    {"NAME": "Address", "TYPE": "location"},
+    {"NAME": "Vehicle Type", "TYPE": "dropdown"},
+    {"NAME": "Registration number", "TYPE": "text", "LABEL": "RegNumber"},
+    {"NAME": "VIN Number", "TYPE": "text" },
+    {"NAME": "Make", "TYPE": "text"},
+    {"NAME": "Model", "TYPE": "text"},
+    {"NAME": "Engine Type", "TYPE": "text"},
+    {"NAME": "Power - KW", "TYPE": "number"},
+    {"NAME": "Vehicle Weight", "TYPE": "number"},
+    {"NAME": "Year of First Registration", "TYPE": "date_time"},
+    {"NAME": "Usage", "TYPE": "dropdown", "LIST": "Vehicle Usage"},
+    {"NAME": "Engine Capacity CC", "TYPE": "number"},
+    {"NAME": "Value of Vehicle", "TYPE": "money"},
+    {"NAME": "Torque ", "TYPE": "money"},
+    {"NAME": "Modification", "TYPE": "boolean"},
+    {"NAME": "Annual Km", "TYPE": "number"},
+    {"NAME": "Liability Bonus Malus", "TYPE": "text"},
+    {"NAME": "Kasko Bonus Malus", "TYPE": "text"},
+    {"NAME": "Damage Deductible", "TYPE": "money"},
+    {"NAME": "Is the vehicle leased", "TYPE": "boolean"},
+    {"NAME": "Is car alarmed ?", "TYPE": "boolean"},
+    {"NAME": "Has your car been modified?", "TYPE": "boolean", "LABEL": "VehicleModification"}
+  ],
+  "Coverage Category": [
+    {"NAME": "Primary Coverages", "TYPE": "clause_category"},
+    {"NAME": "Optional Coverages", "TYPE": "clause_category"}
+  ]
+}

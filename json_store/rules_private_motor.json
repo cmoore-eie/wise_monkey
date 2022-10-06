@@ -1,0 +1,10 @@
+{
+  "new_car_replacement": [
+    [{"LOWER": "new"}, {"LOWER": "car"}, {"LOWER": "replacement"}]
+  ],
+
+  "road_rage": [
+    [{"LOWER": "road"}, {"LOWER": "rage"}]
+  ]
+}
+

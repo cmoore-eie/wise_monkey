@@ -1,0 +1,176 @@
+{
+  "LINE": {
+    "ATTRIBUTES": [],
+    "ATTRIBUTE_CATEGORY": [],
+    "COVERAGE_CATEGORY": [
+    ]
+  },
+  "RISK_OBJECTS":
+  [
+    {"NAME": "Animals", "TYPE": "risk_object", "LABEL":  "Animals",
+      "ATTRIBUTES": [
+        {"NAME": "Pigs", "TYPE": "exposure", "LABEL": "Pigs", "ATTRIBUTES": [
+          {"NAME": "Group ID", "LABEL": "GroupID", "TYPE": "text"},
+          {"NAME": "Description", "LABEL": "Description", "TYPE": "text"},
+          {"NAME": "Number in the Group", "LABEL": "NumberInGroup", "TYPE": "number"},
+          {"NAME": "Where is the pig housed", "TYPE": "text"},
+          {"NAME": "ID from the Animal register where the herd is stabled.", "TYPE": "text"},
+          {"NAME": "Type of Herd", "TYPE": "dropdown", "OPTIONS": [
+            {"NAME": "Breeding (Red)", "TYPE": "text"},
+            {"NAME": "Production (Blue)", "TYPE": "text"}
+          ]},
+          {"NAME": "Buy and Breed ", "TYPE": "text"},
+          {"NAME": "How many pigs are sent to Slaughterhouse", "TYPE": "text"},
+          {"NAME": "Health status of Pig herd", "TYPE": "dropdown", "OPTIONS": [
+            {"NAME": "SPF", "TYPE": "text"},
+            {"NAME": "Conventional", "TYPE": "text"},
+            {"NAME": "PIC", "TYPE": "text"}
+          ]},
+          {"NAME": "Value (calc)", "TYPE": "text"},
+          {"NAME": "Pig Coverages", "TYPE": "text"},
+          {"NAME": "Group Information", "TYPE": "text"}
+        ]},
+        {"NAME": "Cattle ", "LABEL": "Cattle ", "TYPE": "exposure", "ATTRIBUTES": [
+          {"NAME": "Group ID", "LABEL": "GroupID", "TYPE": "text"},
+          {"NAME": "Used for", "TYPE": "text"},
+          {"NAME": "Ear tag number", "TYPE": "text"},
+          {"NAME": "ID from the Animal register where the herd is stabled.", "TYPE": "text"},
+          {"NAME": "Description", "TYPE": "text"},
+          {"NAME": "Number in the group", "TYPE": "text"},
+          {"NAME": "For Dairy cattle", "TYPE": "text"},
+          {"NAME": "Type of breed", "TYPE": "text"},
+          {"NAME": "How many cows do you breed per annum", "TYPE": "text"},
+          {"NAME": "Value (calc)", "TYPE": "text"},
+          {"NAME": "Covers", "TYPE": "text"},
+          {"NAME": "Percentage of cows that are free range/Friland", "TYPE": "text"}
+        ]},
+        {"NAME": "Poultry ", "LABEL": "Poultry ", "TYPE": "exposure", "ATTRIBUTES": [
+          {"NAME": "Group ID", "LABEL": "GroupID", "TYPE": "text"},
+          {"NAME": "Description", "TYPE": "text"},
+          {"NAME": "Number in the group", "TYPE": "text"},
+          {"NAME": "Poultry Type", "TYPE": "text"},
+          {"NAME": "Types", "TYPE": "text"},
+          {"NAME": "How many do you hatch per annum?", "TYPE": "text"},
+          {"NAME": "Percentage of poultry that are free range/ Friland", "TYPE": "text"}
+        ]},
+        {"NAME": "Horses ", "LABEL": "Horses ", "TYPE": "exposure", "ATTRIBUTES": [
+          {"NAME": "Group ID", "LABEL": "GroupID", "TYPE": "text"},
+          {"NAME": "Description", "TYPE": "text"},
+          {"NAME": "Number in the group", "TYPE": "text"},
+          {"NAME": "Horse detail", "TYPE": "exposure", "ATTRIBUTES": [
+  	        {"NAME": "Type of Horse", "TYPE": "dropdown", "OPTIONS": [
+              {"NAME": "Danish Warmblood", "TYPE": "text"},
+              {"NAME": "Faroe Pony", "TYPE": "text"},
+              {"NAME": "Frederiksborg", "TYPE": "text"},
+              {"NAME": "Knubstrupper", "TYPE": "text"}
+            ]},
+            {"NAME": "Name", "TYPE": "text"},
+	          {"NAME": "Race/Breed", "TYPE": "text"},
+	          {"NAME": "Sex", "TYPE": "dropdown", "OPTIONS": [
+                {"NAME": "Male", "TYPE": "text"},
+                {"NAME": "Female", "TYPE": "text"}
+              ]},
+	          {"NAME": "Birthday", "TYPE": "text"},
+	          {"NAME": "Horse Chip number", "TYPE": "text"},
+	          {"NAME": "Horse registration number", "TYPE": "text"},
+	          {"NAME": "Colour", "TYPE": "text"},
+	          {"NAME": "Any special markings", "TYPE": "text"},
+              {"NAME": "Mothers Name", "TYPE": "text"},
+              {"NAME": "Fathers Name", "TYPE": "text"},
+	          {"NAME": "Parents details", "TYPE": "text"},
+	          {"NAME": "Acquisition", "TYPE": "dropdown","OPTIONS": [
+                {"NAME": "Bred", "TYPE": "text"},
+                {"NAME": "Purchased", "TYPE": "text"}
+              ]},
+	          {"NAME": "Type of use", "TYPE": "dropdown", "OPTIONS": [
+                {"NAME": "Horse jumping", "TYPE": "text"},
+                {"NAME": "Horse racing", "TYPE": "text"},
+                {"NAME": "Other", "TYPE": "text"}
+              ]}
+          ]},
+          {"NAME": "Actual Value", "TYPE": "money"},
+          {"NAME": "Insured Value", "TYPE": "money"}
+        ]},
+        {"NAME": "Other types of animals ", "LABEL": "Other ", "TYPE": "exposure", "ATTRIBUTES": [
+          {"NAME": "Are any of the animals used for experiments ?", "TYPE": "text"},
+          {"NAME": "Other Animals", "TYPE": "exposure", "ATTRIBUTES": [
+            {"NAME": "Other Type", "TYPE": "dropdown", "OPTIONS": [
+              {"NAME": "Sheep", "TYPE": "text"},
+              {"NAME": "Goats", "TYPE": "text"},
+              {"NAME": "Emu", "TYPE": "text"},
+              {"NAME": "Ostrich", "TYPE": "text"},
+              {"NAME": "Donkeys", "TYPE": "text"},
+              {"NAME": "Llamas", "TYPE": "text"},
+              {"NAME": "Rabbits", "TYPE": "text"},
+              {"NAME": "Deer", "TYPE": "text"}
+            ]}
+        ]}
+        ]}
+    ],"COVERAGE_CATEGORY": [
+        {"NAME": "Pig Coverages", "TYPE": "clause_category", "LABEL": "PigCC"},
+        {"NAME": "Cattle Coverages", "TYPE": "clause_category", "LABEL": "CattleCC"},
+        {"NAME": "Poultry Coverages", "TYPE": "clause_category", "LABEL": "PoultryCC"},
+        {"NAME": "Horse Single Coverages", "TYPE": "clause_category", "LABEL": "HorseSingleCC"},
+        {"NAME": "Horse Group Coverages", "TYPE": "clause_category", "LABEL": "HorseGroupleCC"},
+        {"NAME": "Other Animal Coverages", "TYPE": "clause_category", "LABEL": "OtherAnimalCC"},
+        {"NAME": "Optional Coverages", "TYPE": "clause_category", "LABEL": "BldgOptCC"}
+    ],
+      "COVERAGES": [
+        {"NAME": "Fire, soot, electricity", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Weather", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Crime", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Water and other fluids", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Other types of damage", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Pig accident", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Ventilation failure", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Fire", "CATEGORY": "Pig Coverages"},
+        {"NAME": "Cattle Insurance", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Fire, soot, electricity,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Weather,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Crime,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Water and other fluids,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Other types of damage,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Calving,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Meat cattle coverage,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Fire,", "CATEGORY": "Cattle Coverages"},
+        {"NAME": "Fire, soot, electricity", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Weather", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Crime", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Water and other fluids", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Other types of damage", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Ventilation failure", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Fire", "CATEGORY": "Poultry Coverages"},
+        {"NAME": "Liability", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Fire, soot, electricity", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Weather", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Crime", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Water and other fluids", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Other types of damage", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Fire", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Smoke", "CATEGORY": "Horse Group Coverages"},
+        {"NAME": "Loss in value", "CATEGORY": "Horse Single Coverages"},
+        {"NAME": "Sickness", "CATEGORY": "Horse Single Coverages"},
+        {"NAME": "Life", "CATEGORY": "Horse Single Coverages"},
+        {"NAME": "Fire, soot, electricity", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Weather", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Crime", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Water and other fluids", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Other types of damage", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Hjorte coverage", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Fire", "CATEGORY": "Other Animal Coverages"},
+        {"NAME": "Smoke", "CATEGORY": "Other Animal Coverages"}
+      ]},
+    {"NAME": "Machines", "TYPE": "risk_object", "LABEL":  "Machines", "ATTRIBUTES": [
+      {"NAME": "Do you have security", "TYPE": "boolean"},
+      {"NAME": "Machine types", "TYPE": "dropdown", "OPTIONS": [
+        {"NAME": "Tractor", "TYPE": "text"},
+        {"NAME": "Harvester", "TYPE": "text"},
+        {"NAME": "Other self propelled >50hp", "TYPE": "text"},
+        {"NAME": "Trailer", "TYPE": "text"},
+        {"NAME": "Big Digger", "TYPE": "text"},
+        {"NAME": "Little Digger", "TYPE": "text"}
+      ]}
+    ]},
+    {"NAME": "Stocks and Crops", "TYPE": "risk_object", "LABEL":  "StocksCrops"}
+    ]
+}
