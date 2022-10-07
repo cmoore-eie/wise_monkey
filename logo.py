@@ -1,3 +1,9 @@
+"""Application ASCII Logo
+
+As the application is designed to run in the terminal
+ascii art is used to make it look nice, the logos
+are raw text to avoid issues with escape characters
+"""
 logo_image = r'''
                            __,__
                   .--.  .-"     "-.  .--.

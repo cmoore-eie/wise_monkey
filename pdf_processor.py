@@ -19,7 +19,7 @@ from xmind_generate import generate_xmind
 spacy_stopwords = spacy.lang.en.stop_words.STOP_WORDS
 
 
-def remove_cover_words():
+def remove_cover_words() -> bool:
     """Remove the coverage term from the identified coverage name
 
     Depending on the naming convention used in the policy wording coverages may be described as
@@ -102,11 +102,18 @@ def apply_phrase_rules(nlp):
             added_name = COMMON_CONVERSIONS[proper_name]
         else:
             added_name = proper_name
-        coverages[added_name] = {'NAME': added_name, 'CATEGORY': 'Primary Coverages'}
+        coverage_code = added_name.replace(' ', '') + 'Cov'
+        coverages[added_name] = {'NAME': added_name, 'CATEGORY': 'Primary Coverages', 'LABEL': coverage_code}
     return coverages, doc
 
 
 def apply_rules(nlp, doc):
+    """Applies the matcher rules defined
+
+    Matcher Rules are defined in a set of json files. The rules in the
+    json files are extracted and transformed into matcher rules that
+    are them applied.
+    """
     wise_monkey_says('Building and applying Matcher Rules')
     new_matcher = Matcher(nlp.vocab)
     rules.build_matcher_rules(new_matcher)
@@ -129,7 +136,8 @@ def apply_rules(nlp, doc):
             added_name = COMMON_CONVERSIONS[proper_name]
         else:
             added_name = proper_name
-        coverages[added_name] = {'NAME': added_name, 'CATEGORY': 'Primary Coverages'}
+        coverage_code = added_name.replace(' ', '') + 'Cov'
+        coverages[added_name] = {'NAME': added_name, 'CATEGORY': 'Primary Coverages', 'LABEL': coverage_code}
     return coverages
 
 
@@ -144,7 +152,7 @@ def process():
     If a regular mind map is to be generated the regular product defined in the
     configuration file will be used to construct the mind map.
     """
-    if not ('input_document' in config.config_dict['Base Information']) and not config.is_regular_product:
+    if 'input_document' not in config.config_dict['Base Information'] and not config.is_regular_product:
         wise_monkey_says(f'No Input file given, generating only the shape for {config.product_shape}')
         coverages = dict()
     elif config.is_regular_product:

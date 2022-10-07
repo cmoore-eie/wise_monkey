@@ -1,3 +1,8 @@
+"""Common Constants
+
+Constant values used in modules to provide a single point
+where the values are defined
+"""
 version_number = '0.4'
 
 JSON_KEYS = dict()

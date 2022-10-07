@@ -28,17 +28,6 @@ def standard_terms(coverage):
 
 def apply_product_shape(line, coverages):
     product_shapes.apply_shape(line, coverages)
-    # if config.product_shape_lower == 'home':
-    #     product_shape_home.apply_shape(line, coverages)
-    #     return
-    # if config.product_shape_lower == 'private motor':
-    #     product_shape_private_motor.apply_shape(line, coverages)
-    #     return
-    # if config.is_regular_product:
-    #     product_shape_regular.apply_shape(line)
-    #     return
-    #
-    # apply_standard_product_shape(line, coverages)
 
 
 def apply_standard_product_shape(line, coverages):
@@ -116,13 +105,15 @@ def build_sheet(sheet1, coverages):
     sheet1.setTitle("Product")
 
     product = sheet1.getRootTopic()
+    product_label = config.config_dict['Product Information']['product_label'].replace(' ','')
     product.setTitle(config.config_dict['Product Information']['product_name'])
-    product.addLabel(config.config_dict['Product Information']['product_label'])
+    product.addLabel(product_label)
     product.addMarker(MARKERS['product'])
 
     line = product.addSubTopic()
+    line_label = config.config_dict['Product Information']['line_label'].replace(' ', '')
     line.setTitle(config.config_dict['Product Information']['line_name'])
-    line.addLabel(config.config_dict['Product Information']['line_label'])
+    line.addLabel(line_label)
     line.addMarker(MARKERS['line'])
 
     apply_about(line)

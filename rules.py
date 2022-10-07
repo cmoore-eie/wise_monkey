@@ -4,7 +4,7 @@ import os
 import config
 
 
-def build_rules(type, matcher):
+def build_rules(rule_type, matcher):
     """Builds the matcher rules from the rule definitions in the json file rules_...
 
     Rules stored in the json file are extracted if the file exists where the
@@ -12,7 +12,7 @@ def build_rules(type, matcher):
     need to be modified to conform with how the rules should look to be
     added to the matcher.
     """
-    file_key = f'{type} rules'
+    file_key = f'{rule_type} rules'
     file_path = f'{config.json_store_location}{config.json_store_files[file_key]}'
     if os.path.exists(file_path):
         with open(file_path) as json_file:

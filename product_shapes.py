@@ -47,7 +47,7 @@ def apply_shape(line, coverages=None):
         utility.add_xmind_coverages(coverages, json_risk_object, risk_object_coverage)
 
 
-def shape_to_dict(shape):
+def shape_to_dict(shape) -> dict:
     if len(config.shape_dict.keys()) > 0:
         return config.shape_dict
 
@@ -77,7 +77,14 @@ def shape_to_dict(shape):
         return {'Attributes': []}
 
 
-def dropdown_to_dict(dropdown_name):
+def dropdown_to_dict(dropdown_name: str) -> list:
+    """Converts the dropdown json definitions for a named set to a list
+
+    The json file is read and converted to a dictionary, the key
+    corresponding to the dropdown name is extracted and returned else
+    an empty list is returned.
+
+    """
     shape_file = config.json_store_location + config.json_store_files['dropdown']
     with open(shape_file) as json_file:
         data = json.load(json_file)
@@ -87,7 +94,7 @@ def dropdown_to_dict(dropdown_name):
             return []
 
 
-def is_related(json_object, child):
+def is_related(json_object, child) -> bool:
     """Identifies if the attribute is a child in the relationship
 
     if the child is part of a defined relationship it will be created when the dropdown values of the parent are

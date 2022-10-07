@@ -28,7 +28,7 @@
         {"NAME": "Who Occupies the Property", "TYPE": "dropdown", "LIST": "Occupancy", "LABEL": "Occupancy", "CATEGORY": "Occupancy questions"},
         {"NAME": "How long is the Property normally occupied", "TYPE": "dropdown", "LIST": "Occupied", "LABEL": "Occupied", "CATEGORY": "Occupancy questions"},
         {"NAME": "What type of locks are the majority of external doors fitted with", "TYPE": "text", "LABEL": "DoorType", "CATEGORY": "Security"},
-        {"NAME": "Are all accessible windows, fanlights and skylights fitted with key operated locks?", "TYPE": "boolean", "LABEL":  "Window Locks", "CATEGORY": "Security"},
+        {"NAME": "Are all accessible windows, fanlights and skylights fitted with key operated locks?", "TYPE": "boolean", "LABEL":  "WindowLocks", "CATEGORY": "Security"},
         {"NAME": "Do you have CCTV at the property to be insured", "TYPE": "dropdown", "LIST": "Yes No", "LABEL": "CCTV", "CATEGORY": "Security"},
         {"NAME": "Does the CCTV system have remote internet monitoring?", "TYPE": "boolean", "LABEL": "CCTVMonitoring", "CATEGORY": "Security"},
         {"NAME": "Which areas are covered", "TYPE": "text", "LABEL": "CCTVAreaCovered", "CATEGORY": "Security"},

@@ -25,7 +25,7 @@ def add_xmind_attributes(topic, json_object):
     attributes = json_object[JSON_KEYS['attributes']]
     for attribute in attributes:
         if not (is_related(json_object, attribute['NAME'])):
-            if not (JSON_KEYS['category'] in attribute):
+            if JSON_KEYS['category'] not in attribute:
                 add_attribute(attribute, topic, json_object)
 
     if JSON_KEYS['attribute_category'] in json_object.keys():
@@ -36,7 +36,7 @@ def add_xmind_attributes(topic, json_object):
                     add_attribute(attribute, topic, json_object, question_category_topic)
 
 
-def add_question_categories(topic, json_object):
+def add_question_categories(topic, json_object) -> dict:
     """ Adds the question (Attribute) categories to the mind map
 
     Question Categories are added to the topic that is passed in,
@@ -61,7 +61,7 @@ def add_question_categories(topic, json_object):
     return question_category_topic
 
 
-def add_coverage_categories(topic, json_object):
+def add_coverage_categories(topic, json_object) -> dict:
     coverage_category_topic = dict()
     if JSON_KEYS['coverage_category'] in json_object.keys():
         coverage_categories = json_object[JSON_KEYS['coverage_category']]
@@ -189,9 +189,9 @@ def to_title(string) -> str:
 
 
 def load_shape_files():
-    file = config.json_store_location + 'json_store.json'
+    json_store_file = config.json_store_location + 'json_store.json'
     try:
-        with open(file) as json_file:
+        with open(json_store_file) as json_file:
             list_items = json.load(json_file)['Json Store']
             for item in list_items:
                 config.json_store_files.update(item)
