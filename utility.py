@@ -2,6 +2,8 @@ import json
 import os.path
 import re
 import sys
+from json import JSONDecodeError
+
 import config
 from product_shapes import dropdown_to_dict, is_related
 from constants import MARKERS, JSON_KEYS
@@ -23,11 +25,25 @@ def add_xmind_attributes(topic, json_object):
     """
 
     attributes = json_object[JSON_KEYS['attributes']]
+    attribute_no_category(attributes, topic, json_object)
+    attribute_with_category(attributes, topic, json_object)
+
+
+def attribute_no_category(attributes, topic, json_object):
+    """Add attributes that don't have a corresponding category"""
     for attribute in attributes:
         if not (is_related(json_object, attribute['NAME'])):
             if JSON_KEYS['category'] not in attribute:
                 add_attribute(attribute, topic, json_object)
 
+
+def attribute_with_category(attributes, topic, json_object):
+    """Add the attributes that have a corresponding category
+
+    The first part of the process is to add the attribute
+    categories then add the attributes to the corresponding
+    category
+    """
     if JSON_KEYS['attribute_category'] in json_object.keys():
         question_category_topic = add_question_categories(topic, json_object)
         for attribute in attributes:
@@ -85,6 +101,13 @@ def add_dropdown(attribute, item, json_object):
     else:
         dropdown_data = dropdown_to_dict(dropdown_name)
 
+    if len(dropdown_data) == 0:
+        return
+
+    process_dropdown_items(dropdown_data, item, attribute, json_object)
+
+
+def process_dropdown_items(dropdown_data, item, attribute, json_object):
     for dropdown_value in dropdown_data:
         if type(dropdown_value) == dict:
             item_option = item.addSubTopic()
@@ -144,32 +167,37 @@ def add_xmind_coverages(coverages, json_object, topic):
                 topic_to_use = coverage_categories[coverage['CATEGORY']]
             else:
                 topic_to_use = topic
-            new_coverage = topic_to_use.addSubTopic()
-            new_coverage.setTitle(coverage['NAME'])
-            new_coverage.addMarker(MARKERS['coverage'])
-            if 'LABEL' in coverage.keys():
-                new_coverage.addLabel(coverage['LABEL'])
-
-            if 'TERMS' in coverage.keys():
-                for term in coverage['TERMS']:
-                    new_term = add_attribute(term, new_coverage, json_object)
-
-                    if 'ATTRIBUTES' in term.keys():
-                        for term_attribute in term['ATTRIBUTES']:
-                            add_attribute(term_attribute, new_term, json_object)
+            build_coverage(topic_to_use, coverage, json_object)
     else:
         wise_monkey_says_oops(f'Coverages must have a category and none are defined for {json_object["NAME"]}')
 
 
+def build_coverage(topic_to_use, coverage, json_object):
+    new_coverage = topic_to_use.addSubTopic()
+    new_coverage.setTitle(coverage['NAME'])
+    new_coverage.addMarker(MARKERS['coverage'])
+    if 'LABEL' in coverage.keys():
+        new_coverage.addLabel(coverage['LABEL'])
+
+    if 'TERMS' in coverage.keys():
+        for term in coverage['TERMS']:
+            new_term = add_attribute(term, new_coverage, json_object)
+
+            if 'ATTRIBUTES' in term.keys():
+                for term_attribute in term['ATTRIBUTES']:
+                    add_attribute(term_attribute, new_term, json_object)
+
+
 def extract_related(json_object, parent, link, topic):
-    if JSON_KEYS['related'] in json_object.keys():
-        related = json_object[JSON_KEYS['related']]
-        attributes = json_object[JSON_KEYS['attributes']]
-        for relationship in related:
-            if relationship['PARENT'] == parent and relationship['LINK'] == link:
-                for attribute in attributes:
-                    if attribute['NAME'] == relationship['CHILD']:
-                        add_attribute(attribute, topic, json_object)
+    if JSON_KEYS['related'] not in json_object.keys():
+        return
+    related = json_object[JSON_KEYS['related']]
+    attributes = json_object[JSON_KEYS['attributes']]
+    for relationship in related:
+        if relationship['PARENT'] == parent and relationship['LINK'] == link:
+            for attribute in attributes:
+                if attribute['NAME'] == relationship['CHILD']:
+                    add_attribute(attribute, topic, json_object)
 
 
 def wise_monkey_says(message):
@@ -194,15 +222,20 @@ def load_shape_files():
         with open(json_store_file) as json_file:
             list_items = json.load(json_file)['Json Store']
             for item in list_items:
-                config.json_store_files.update(item)
-    except:
+                config.json_store_files.append(item)
+    except JSONDecodeError:
         wise_monkey_says_oops(f"The json file json_store.json can't be processed")
         sys.exit(1)
 
 
 def load_phrase_files():
     file_key = f'{config.product_shape_lower} phrases'
-    file_path = f'{config.json_store_location}{config.json_store_files[file_key]}'
+    store_item = extract_store_file(file_key)
+
+    if store_item is None:
+        return
+
+    file_path = f'{config.json_store_location}{store_item}'
     if os.path.exists(file_path):
         with open(file_path) as json_file:
             list_items = json.load(json_file)['Phrases']
@@ -247,3 +280,14 @@ def write_tokens(doc):
         })
 
         token_set.to_excel(excel_file, sheet_name='tokens')
+
+
+def extract_store_file(search_item):
+    """Extract the store name from the store list"""
+    for item in config.json_store_files:
+        product = item["PRODUCT"]
+        shape = item['SHAPE']
+        language = item['LANGUAGE']
+        if product == search_item and language == config.language:
+            return shape
+    return None

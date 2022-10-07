@@ -4,6 +4,7 @@ import sys
 import time
 
 import config
+import constants
 import logo
 import pdf_processor
 from utility import wise_monkey_says, load_shape_files
@@ -58,29 +59,92 @@ def main(argv):
             sys.exit(1)
         config.config_dict = {s: dict(conf.items(s)) for s in conf.sections()}
 
-        if 'json_store_location' in config.config_dict['Base Information'].keys():
-            config.json_store_location = config.config_dict['Base Information']['json_store_location']
-            load_shape_files()
-        else:
-            wise_monkey_says('You forgot to tell me where the json files can be found')
-            wise_monkey_says('if you set the json_store in the configuration file we can try again')
-            sys.exit(1)
-
-        config.product_shape = config.config_dict['Product Information']['product_shape']
-        config.product_shape_lower = config.product_shape.lower()
-        if config.product_shape_lower == 'regular':
-            config.is_regular_product = True
-            config.regular_product = config.config_dict['Product Information']['regular_product']
-            config.regular_product_lower = config.regular_product.lower()
-        else:
-            config.is_regular_product = False
-            wise_monkey_says(f'Looks like we will be working on the {config.product_shape} product')
+        set_json_store()
+        set_language()
+        set_language_file()
+        set_product_shape()
 
         pdf_processor.process()
         config.end_process_time = time.perf_counter()
         elapsed = config.end_process_time - config.start_process_time
         elapsed_format = '{:.2f}'.format(elapsed)
         wise_monkey_says(f'For Reference the process took {elapsed_format} seconds')
+
+
+def set_language():
+    """ Set the language code
+
+    Extracts the language value from the configuration file, if there is no language
+    specified the default of English (en) will be set
+    """
+    config.language = 'en'
+    message_process = True
+    if constants.LANGUAGE_INFORMATION in config.config_dict.keys():
+        if 'language' in config.config_dict[constants.LANGUAGE_INFORMATION].keys():
+            supplied_language = config.config_dict[constants.LANGUAGE_INFORMATION]['language']
+            if len(supplied_language) > 0:
+                message_process = False
+                config.language = supplied_language
+            else:
+                message_process = True
+
+    if message_process:
+        wise_monkey_says(f"As you didn't supply a language English (en) will be used")
+        wise_monkey_says(f"Add the language parameter to the ini file if you want a different language")
+
+
+def set_language_file():
+    """ Set the language code
+
+    Extracts the language value from the configuration file, if there is no language
+    specified the default of English (en) will be set
+    """
+    config.language_file = 'en_core_web_md'
+    message_process = True
+    if constants.LANGUAGE_INFORMATION in config.config_dict.keys():
+        if 'language_file' in config.config_dict[constants.LANGUAGE_INFORMATION].keys():
+            supplied_language_file = config.config_dict[constants.LANGUAGE_INFORMATION]['language_file']
+            if len(supplied_language_file) > 0:
+                message_process = False
+                config.language_file = supplied_language_file
+            else:
+                message_process = True
+
+    if message_process:
+        wise_monkey_says(f"As you didn't supply a language file 'en_core_web_md' will be used")
+        wise_monkey_says(f"Add the language_file parameter to the ini file that corresponds to the language set")
+
+
+def set_json_store():
+    """Extract the json_store configuration
+
+    Extracts the location of the json store processes the
+    json_store.json file to get a dictionary to use
+    """
+    if 'json_store_location' in config.config_dict[constants.BASE_INFORMATION].keys():
+        config.json_store_location = config.config_dict[constants.BASE_INFORMATION]['json_store_location']
+        load_shape_files()
+    else:
+        wise_monkey_says('You forgot to tell me where the json files can be found')
+        wise_monkey_says('if you set the json_store in the configuration file we can try again')
+        sys.exit(1)
+
+
+def set_product_shape():
+    """Sets the product shape config parameter
+
+    Sets the product shape and product shape lower config values, if the product is
+    defined as regular the regular product and regular product lower are set
+    """
+    config.product_shape = config.config_dict[constants.PRODUCT_INFORMATION]['product_shape']
+    config.product_shape_lower = config.product_shape.lower()
+    if config.product_shape_lower == 'regular':
+        config.is_regular_product = True
+        config.regular_product = config.config_dict[constants.PRODUCT_INFORMATION]['regular_product']
+        config.regular_product_lower = config.regular_product.lower()
+    else:
+        config.is_regular_product = False
+        wise_monkey_says(f'Looks like we will be working on the {config.product_shape} product')
 
 
 if __name__ == "__main__":

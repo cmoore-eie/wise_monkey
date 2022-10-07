@@ -4,6 +4,9 @@ Constant values used in modules to provide a single point
 where the values are defined
 """
 version_number = '0.4'
+BASE_INFORMATION = 'Base Information'
+PRODUCT_INFORMATION = 'Product Information'
+LANGUAGE_INFORMATION = 'Language Information'
 
 JSON_KEYS = dict()
 JSON_KEYS['attributes'] = 'ATTRIBUTES'

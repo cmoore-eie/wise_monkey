@@ -47,7 +47,7 @@ def apply_shape(line, coverages=None):
         utility.add_xmind_coverages(coverages, json_risk_object, risk_object_coverage)
 
 
-def shape_to_dict(shape) -> dict:
+def extract_shape(shape) -> list:
     if len(config.shape_dict.keys()) > 0:
         return config.shape_dict
 
@@ -56,8 +56,10 @@ def shape_to_dict(shape) -> dict:
     else:
         test_product_shape = config.product_shape_lower
 
-    if test_product_shape in config.json_store_files.keys():
-        file_path = config.json_store_location + config.json_store_files[test_product_shape]
+    store_item = utility.extract_store_file(test_product_shape)
+
+    if store_item is not None:
+        file_path = config.json_store_location + store_item
         if os.path.exists(file_path):
             with open(file_path) as json_file:
                 try:
@@ -74,7 +76,7 @@ def shape_to_dict(shape) -> dict:
     else:
         utility.wise_monkey_says_oops(f'There is no definition for Shape {shape}')
         utility.wise_monkey_says_oops(f'Proceeding with no product shape')
-        return {'Attributes': []}
+        return []
 
 
 def dropdown_to_dict(dropdown_name: str) -> list:
@@ -85,13 +87,14 @@ def dropdown_to_dict(dropdown_name: str) -> list:
     an empty list is returned.
 
     """
-    shape_file = config.json_store_location + config.json_store_files['dropdown']
-    with open(shape_file) as json_file:
-        data = json.load(json_file)
-        if dropdown_name in data.keys():
-            return data[dropdown_name]
-        else:
-            return []
+    store_item = utility.extract_store_file('dropdown')
+    if store_item is not None:
+        shape_file = config.json_store_location + store_item
+        with open(shape_file) as json_file:
+            data = json.load(json_file)
+            if dropdown_name in data.keys():
+                return data[dropdown_name]
+    return []
 
 
 def is_related(json_object, child) -> bool:

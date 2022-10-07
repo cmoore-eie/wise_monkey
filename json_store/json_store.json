@@ -1,16 +1,16 @@
 {
-  "Json Store":[
-    {"agriculture": "product_shape_agriculture.json"},
-    {"agriculture phrases": "rules_phrase_agriculture.json"},
-    {"agriculture rules": "rules_agriculture.json"},
-    {"home": "product_shape_home.json"},
-    {"home phrases": "rules_phrase_home.json"},
-    {"home rules": "rules_home.json"},
-    {"private motor": "product_shape_private_motor.json"},
-    {"private motor phrases": "rules_phrase_private_motor.json"},
-    {"private motor rules": "rules_private_motor.json"},
-    {"dropdown": "product_shape_dropdown.json"},
-    {"gw_uk_homeowners": "product_shape_gw_uk_homeowners.json"},
-    {"other rules": "rules_other.json"}
+  "Json Store": [
+    {"PRODUCT": "agriculture", "SHAPE": "product_shape_agriculture.json", "LANGUAGE": "en"},
+    {"PRODUCT": "agriculture phrases", "SHAPE": "rules_phrase_agriculture.json", "LANGUAGE": "en"},
+    {"PRODUCT": "agriculture rules", "SHAPE": "rules_agriculture.json", "LANGUAGE": "en"},
+    {"PRODUCT": "home", "SHAPE": "product_shape_home.json", "LANGUAGE": "en"},
+    {"PRODUCT": "home phrases", "SHAPE": "rules_phrase_home.json", "LANGUAGE": "en"},
+    {"PRODUCT": "home rules", "SHAPE": "rules_home.json", "LANGUAGE": "en"},
+    {"PRODUCT": "private motor", "SHAPE": "product_shape_private_motor.json", "LANGUAGE": "en"},
+    {"PRODUCT": "private motor phrases", "SHAPE": "rules_phrase_private_motor.json", "LANGUAGE": "en"},
+    {"PRODUCT": "private motor rules", "SHAPE": "rules_private_motor.json", "LANGUAGE": "en"},
+    {"PRODUCT": "dropdown", "SHAPE": "product_shape_dropdown.json", "LANGUAGE": "en"},
+    {"PRODUCT": "gw_uk_homeowners", "SHAPE": "product_shape_gw_uk_homeowners.json", "LANGUAGE": "en"},
+    {"PRODUCT": "other rules", "SHAPE": "rules_other.json", "LANGUAGE": "en"}
   ]
 }

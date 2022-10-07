@@ -3,9 +3,10 @@ from datetime import date
 import xmind
 
 import config
+import constants
 import product_shapes
 from constants import MARKERS, JSON_KEYS
-from product_shapes import shape_to_dict
+from product_shapes import extract_shape
 from utility import add_xmind_attributes, add_xmind_coverages
 
 standard_term_types = {
@@ -98,21 +99,21 @@ def apply_about(line):
 
 def build_sheet(sheet1, coverages):
     if config.is_regular_product:
-        shape_to_dict(config.regular_product_lower)
+        extract_shape(config.regular_product_lower)
     else:
-        shape_to_dict(config.product_shape_lower)
+        extract_shape(config.product_shape_lower)
 
     sheet1.setTitle("Product")
 
     product = sheet1.getRootTopic()
-    product_label = config.config_dict['Product Information']['product_label'].replace(' ','')
-    product.setTitle(config.config_dict['Product Information']['product_name'])
+    product_label = config.config_dict[constants.PRODUCT_INFORMATION]['product_label'].replace(' ', '')
+    product.setTitle(config.config_dict[constants.PRODUCT_INFORMATION]['product_name'])
     product.addLabel(product_label)
     product.addMarker(MARKERS['product'])
 
     line = product.addSubTopic()
-    line_label = config.config_dict['Product Information']['line_label'].replace(' ', '')
-    line.setTitle(config.config_dict['Product Information']['line_name'])
+    line_label = config.config_dict[constants.PRODUCT_INFORMATION]['line_label'].replace(' ', '')
+    line.setTitle(config.config_dict[constants.PRODUCT_INFORMATION]['line_name'])
     line.addLabel(line_label)
     line.addMarker(MARKERS['line'])
 
