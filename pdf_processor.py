@@ -76,7 +76,7 @@ def apply_phrase_rules(nlp):
     Phrases are added as a first search in the document,
     """
     wise_monkey_says('Building and applying Phrase Rules')
-    new_matcher = PhraseMatcher(nlp.vocab)
+    new_matcher = PhraseMatcher(nlp.vocab, None)
 
     load_phrase_files()
     patterns = [nlp(phrase) for phrase in config.matcher_phrases]
@@ -88,15 +88,8 @@ def apply_phrase_rules(nlp):
     matches = new_matcher(doc)
     for match_id, start, end in matches:
         matched_text = doc[start:end]
-        final_text = ''
-        for t in matched_text:
-            if t.is_punct or t.pos_ == 'PART':
-                ...
-            else:
-                if not (remove_cover_words() and t.text.lower() in COVERAGE_WORDS):
-                    final_text = final_text + ' ' + t.text_with_ws
 
-        final_text = final_text.replace('  ', ' ')
+        final_text = build_final_text(matched_text)
         proper_name = to_title(final_text.strip())
         if proper_name in COMMON_CONVERSIONS.keys():
             added_name = COMMON_CONVERSIONS[proper_name]
@@ -105,6 +98,19 @@ def apply_phrase_rules(nlp):
         coverage_code = added_name.replace(' ', '') + 'Cov'
         coverages[added_name] = {'NAME': added_name, 'CATEGORY': 'Primary Coverages', 'LABEL': coverage_code}
     return coverages, doc
+
+
+def build_final_text(matched_text: list) -> str:
+    final_text = ''
+    for t in matched_text:
+        if t.is_punct or t.pos_ == 'PART':
+            ...
+        else:
+            if not (remove_cover_words() and t.text.lower() in COVERAGE_WORDS):
+                final_text = final_text + ' ' + t.text_with_ws
+
+    final_text = final_text.replace('  ', ' ')
+    return final_text
 
 
 def apply_rules(nlp, doc):
@@ -122,15 +128,8 @@ def apply_rules(nlp, doc):
     matches = new_matcher(doc)
     for match_id, start, end in matches:
         matched_text = doc[start:end]
-        final_text = ''
-        for t in matched_text:
-            if t.is_punct or t.pos_ == 'PART':
-                ...
-            else:
-                if not (remove_cover_words() and t.text.lower() in COVERAGE_WORDS):
-                    final_text = final_text + ' ' + t.text_with_ws
 
-        final_text = final_text.replace('  ', ' ')
+        final_text = build_final_text(matched_text)
         proper_name = to_title(final_text.strip())
         if proper_name in COMMON_CONVERSIONS.keys():
             added_name = COMMON_CONVERSIONS[proper_name]
@@ -168,7 +167,6 @@ def process():
             sys.exit(1)
     else:
         nlp = spacy.load("en_core_web_md")
-        spacy_punctuation = spacy.lang.en.punctuation
         phrase_coverages, doc = apply_phrase_rules(nlp)
         write_tokens(doc)
         rule_coverages = apply_rules(nlp, doc)
