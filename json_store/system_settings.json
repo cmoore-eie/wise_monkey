@@ -1,0 +1,11 @@
+{
+  "Languages": [
+    {"CODE": "en", "NAME": "English"},
+    {"CODE": "fr", "NAME": "French"}
+  ],
+  "Language Files": [
+    {"CODE": "en_core_web_sm", "NAME": "English Small"},
+    {"CODE": "en_core_web_md", "NAME": "English Medium"},
+    {"CODE": "en_core_web_lg", "NAME": "English Large"}
+  ]
+}

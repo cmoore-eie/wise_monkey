@@ -2,12 +2,12 @@ import configparser
 import getopt
 import sys
 import time
-
 import config
 import logo
 import pdf_processor
 from constants import GeneralConstants
-from utility import wise_monkey_says, load_shape_files
+from system_settings import read_system_settings, fetch_languages, fetch_language_codes, fetch_language_file_codes
+from utility import wise_monkey_says, load_shape_files, wise_monkey_says_oops
 
 process_errors = dict()
 help_str = '''
@@ -51,17 +51,12 @@ def main(argv):
         for error_item in process_errors:
             print(f"({error_item}) : {process_errors[error_item]}")
     else:
-
-        conf = configparser.ConfigParser()
-        read_files = conf.read(config_file)
-        if len(read_files) == 0:
-            wise_monkey_says(f"Configuration file {config_file} can't be found")
-            sys.exit(1)
-        config.config_dict = {s: dict(conf.items(s)) for s in conf.sections()}
+        config.read_configuration(config_file)
         if 'input_document' in config.config_dict[GeneralConstants.base_information.value].keys():
             config.input_document = config.config_dict[GeneralConstants.base_information.value]['input_document']
 
         set_json_store()
+        fetch_system_settings()
         set_language()
         set_language_file()
         set_product_shape()
@@ -71,6 +66,10 @@ def main(argv):
         elapsed = config.end_process_time - config.start_process_time
         elapsed_format = '{:.2f}'.format(elapsed)
         wise_monkey_says(f'For Reference the process took {elapsed_format} seconds')
+
+
+def fetch_system_settings():
+    read_system_settings()
 
 
 def set_language():
@@ -85,14 +84,18 @@ def set_language():
         if 'language' in config.config_dict[GeneralConstants.language_information.value].keys():
             supplied_language = config.config_dict[GeneralConstants.language_information.value]['language']
             if len(supplied_language) > 0:
+                if supplied_language not in fetch_language_codes():
+                    wise_monkey_says_oops(f"Currently I am not supporting a language with the code {supplied_language}")
+                    wise_monkey_says_oops(f'I will do my best to learn this language for our next visit')
+                    sys.exit(1)
                 message_process = False
                 config.language = supplied_language
             else:
                 message_process = True
 
     if message_process:
-        wise_monkey_says(f"As you didn't supply a language English (en) will be used")
-        wise_monkey_says(f"Add the language parameter to the ini file if you want a different language")
+        wise_monkey_says_oops(f"As you didn't supply a language English (en) will be used")
+        wise_monkey_says_oops(f"Add the language parameter to the ini file if you want a different language")
 
 
 def set_language_file():
@@ -107,6 +110,10 @@ def set_language_file():
         if 'language_file' in config.config_dict[GeneralConstants.language_information.value].keys():
             supplied_language_file = config.config_dict[GeneralConstants.language_information.value]['language_file']
             if len(supplied_language_file) > 0:
+                if supplied_language_file not in fetch_language_file_codes():
+                    wise_monkey_says_oops(f"I currently don't handle {supplied_language_file} language file")
+                    wise_monkey_says_oops(f'I will explore the option of making use of this in the future')
+                    sys.exit(1)
                 message_process = False
                 config.language_file = supplied_language_file
             else:
