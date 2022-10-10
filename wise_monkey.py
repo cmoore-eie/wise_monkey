@@ -4,9 +4,9 @@ import sys
 import time
 
 import config
-import constants
 import logo
 import pdf_processor
+from constants import GeneralConstants
 from utility import wise_monkey_says, load_shape_files
 
 process_errors = dict()
@@ -58,6 +58,8 @@ def main(argv):
             wise_monkey_says(f"Configuration file {config_file} can't be found")
             sys.exit(1)
         config.config_dict = {s: dict(conf.items(s)) for s in conf.sections()}
+        if 'input_document' in config.config_dict[GeneralConstants.base_information.value].keys():
+            config.input_document = config.config_dict[GeneralConstants.base_information.value]['input_document']
 
         set_json_store()
         set_language()
@@ -79,9 +81,9 @@ def set_language():
     """
     config.language = 'en'
     message_process = True
-    if constants.LANGUAGE_INFORMATION in config.config_dict.keys():
-        if 'language' in config.config_dict[constants.LANGUAGE_INFORMATION].keys():
-            supplied_language = config.config_dict[constants.LANGUAGE_INFORMATION]['language']
+    if GeneralConstants.language_information.value in config.config_dict.keys():
+        if 'language' in config.config_dict[GeneralConstants.language_information.value].keys():
+            supplied_language = config.config_dict[GeneralConstants.language_information.value]['language']
             if len(supplied_language) > 0:
                 message_process = False
                 config.language = supplied_language
@@ -101,9 +103,9 @@ def set_language_file():
     """
     config.language_file = 'en_core_web_md'
     message_process = True
-    if constants.LANGUAGE_INFORMATION in config.config_dict.keys():
-        if 'language_file' in config.config_dict[constants.LANGUAGE_INFORMATION].keys():
-            supplied_language_file = config.config_dict[constants.LANGUAGE_INFORMATION]['language_file']
+    if GeneralConstants.language_information.value in config.config_dict.keys():
+        if 'language_file' in config.config_dict[GeneralConstants.language_information.value].keys():
+            supplied_language_file = config.config_dict[GeneralConstants.language_information.value]['language_file']
             if len(supplied_language_file) > 0:
                 message_process = False
                 config.language_file = supplied_language_file
@@ -121,8 +123,8 @@ def set_json_store():
     Extracts the location of the json store processes the
     json_store.json file to get a dictionary to use
     """
-    if 'json_store_location' in config.config_dict[constants.BASE_INFORMATION].keys():
-        config.json_store_location = config.config_dict[constants.BASE_INFORMATION]['json_store_location']
+    if 'json_store_location' in config.config_dict[GeneralConstants.base_information.value].keys():
+        config.json_store_location = config.config_dict[GeneralConstants.base_information.value]['json_store_location']
         load_shape_files()
     else:
         wise_monkey_says('You forgot to tell me where the json files can be found')
@@ -136,11 +138,11 @@ def set_product_shape():
     Sets the product shape and product shape lower config values, if the product is
     defined as regular the regular product and regular product lower are set
     """
-    config.product_shape = config.config_dict[constants.PRODUCT_INFORMATION]['product_shape']
+    config.product_shape = config.config_dict[GeneralConstants.product_information.value]['product_shape']
     config.product_shape_lower = config.product_shape.lower()
     if config.product_shape_lower == 'regular':
         config.is_regular_product = True
-        config.regular_product = config.config_dict[constants.PRODUCT_INFORMATION]['regular_product']
+        config.regular_product = config.config_dict[GeneralConstants.product_information.value]['regular_product']
         config.regular_product_lower = config.regular_product.lower()
     else:
         config.is_regular_product = False

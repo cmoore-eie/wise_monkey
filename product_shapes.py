@@ -5,25 +5,32 @@ from json import JSONDecodeError
 
 import config
 import utility
-from constants import JSON_KEYS, MARKERS
+from constants import JsonKeys, Markers
 
 
 def apply_shape(line, coverages=None):
-    for json_risk_object in config.shape_dict[JSON_KEYS['risk_objects']]:
+    """Applies the information to the mind map for each risk object
+
+    Loops over the risk objects defined in the shape file adding it,
+    attributes and coverages. If there has been an import file to
+    process then coverages from the shape will be ignored in favour of
+    the coverages extracted.
+    """
+    for json_risk_object in config.shape_dict[JsonKeys.risk_objects.value]:
         risk_object = line.addSubTopic()
         risk_object.setTitle(json_risk_object['NAME'])
-        risk_object.addMarker(MARKERS[json_risk_object['TYPE']])
+        risk_object.addMarker(Markers[json_risk_object['TYPE']].value)
         if 'LABEL' in json_risk_object.keys():
             risk_object.addLabel(json_risk_object['LABEL'])
 
         risk_object_notes = risk_object.addSubTopic()
         risk_object_notes.setTitle("Notes")
-        risk_object_notes.addMarker(MARKERS['info'])
+        risk_object_notes.addMarker(Markers.info.value)
 
         risk_object_attribute = risk_object.addSubTopic()
         risk_object_attribute.setTitle("Attributes")
 
-        if JSON_KEYS['attributes'] in json_risk_object.keys():
+        if JsonKeys.attributes in json_risk_object.keys():
             utility.add_xmind_attributes(risk_object_attribute, json_risk_object)
 
         risk_object_coverage = risk_object.addSubTopic()
@@ -33,16 +40,16 @@ def apply_shape(line, coverages=None):
         risk_object_exclusions.setTitle("Exclusions")
         risk_object_exclusions_category = risk_object_exclusions.addSubTopic()
         risk_object_exclusions_category.setTitle("Standard Exclusions")
-        risk_object_exclusions_category.addMarker(MARKERS['clause_category'])
+        risk_object_exclusions_category.addMarker(Markers.clause_category.value)
 
         risk_object_conditions = risk_object.addSubTopic()
         risk_object_conditions.setTitle("Conditions")
         risk_object_conditions_category = risk_object_conditions.addSubTopic()
         risk_object_conditions_category.setTitle("Standard Conditions")
-        risk_object_conditions_category.addMarker(MARKERS['clause_category'])
+        risk_object_conditions_category.addMarker(Markers.clause_category.value)
 
-        if JSON_KEYS['coverages'] in json_risk_object.keys():
-            coverages = json_risk_object[JSON_KEYS['coverages']]
+        if JsonKeys.coverages in json_risk_object.keys() and coverages is None:
+            coverages = json_risk_object[JsonKeys.coverages]
 
         utility.add_xmind_coverages(coverages, json_risk_object, risk_object_coverage)
 
@@ -107,9 +114,9 @@ def is_related(json_object, child) -> bool:
     :parameter child the attribute to search for
     :return bool False if the child is not related otherwise it will return True
     """
-    if JSON_KEYS['related'] not in json_object.keys():
+    if JsonKeys.related not in json_object.keys():
         return False
-    related = json_object[JSON_KEYS['related']]
+    related = json_object[JsonKeys.related]
     for relationship in related:
         if relationship['CHILD'] == child:
             return True

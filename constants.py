@@ -1,22 +1,30 @@
 """Common Constants
 
 Constant values used in modules to provide a single point
-where the values are defined
+where the values are defined. Where possible Enum is ued
+this ensures that there is not change or possibility
+of overwriting the values in code
 """
-version_number = '0.4'
-BASE_INFORMATION = 'Base Information'
-PRODUCT_INFORMATION = 'Product Information'
-LANGUAGE_INFORMATION = 'Language Information'
+from enum import Enum
 
-JSON_KEYS = dict()
-JSON_KEYS['attributes'] = 'ATTRIBUTES'
-JSON_KEYS['related'] = 'RELATED'
-JSON_KEYS['attribute_category'] = 'ATTRIBUTE_CATEGORY'
-JSON_KEYS['coverage_category'] = 'COVERAGE_CATEGORY'
-JSON_KEYS['coverages'] = 'COVERAGES'
-JSON_KEYS['risk_objects'] = 'RISK_OBJECTS'
-JSON_KEYS['category'] = 'CATEGORY'
-JSON_KEYS['line'] = "LINE"
+
+class GeneralConstants(Enum):
+    version_number = '0.4'
+    base_information = 'Base Information'
+    product_information = 'Product Information'
+    language_information = 'Language Information'
+
+
+class JsonKeys(Enum):
+    attributes = 'ATTRIBUTES'
+    related = 'RELATED'
+    attribute_category = 'ATTRIBUTE_CATEGORY'
+    coverage_category = 'COVERAGE_CATEGORY'
+    coverages = 'COVERAGES'
+    risk_objects = 'RISK_OBJECTS'
+    category = 'CATEGORY'
+    line = "LINE"
+
 
 #
 # When coverage words are to be removed it will check against this list and not add the name to the label of the
@@ -24,25 +32,27 @@ JSON_KEYS['line'] = "LINE"
 #
 COVERAGE_WORDS = ['cover', 'coverage']
 
+
 #
 # MARKERS are the icons added to the topics
 #
-MARKERS = dict()
-MARKERS['attribute_category'] = 'gw_question'
-MARKERS['boolean'] = 'gw_boolean'
-MARKERS['clause_category'] = 'gw_clause_category'
-MARKERS['coverage'] = 'gw_coverage'
-MARKERS['date_time'] = 'gw_date_time'
-MARKERS['dropdown'] = 'gw_drop_down'
-MARKERS['exposure'] = 'gw_exposure'
-MARKERS['info'] = 'symbol-info'
-MARKERS['line'] = 'gw_line'
-MARKERS['location'] = 'gw_location'
-MARKERS['money'] = 'gw_money'
-MARKERS['number'] = 'gw_integer'
-MARKERS['product'] = 'gw_product'
-MARKERS['risk_object'] = 'gw_risk_object'
-MARKERS['text'] = 'gw_text'
+class Markers(Enum):
+    attribute_category = 'gw_question'
+    boolean = 'gw_boolean'
+    clause_category = 'gw_clause_category'
+    coverage = 'gw_coverage'
+    date_time = 'gw_date_time'
+    dropdown = 'gw_drop_down'
+    exposure = 'gw_exposure'
+    info = 'symbol-info'
+    line = 'gw_line'
+    location = 'gw_location'
+    money = 'gw_money'
+    number = 'gw_integer'
+    product = 'gw_product'
+    risk_object = 'gw_risk_object'
+    text = 'gw_text'
+
 
 #
 # Common Conversions
@@ -60,3 +70,11 @@ COMMON_CONVERSIONS['Loss Theft Keys'] = 'Loss or Theft of Keys'
 COMMON_CONVERSIONS['Water Oil Escaping'] = 'Water or Oil Escaping'
 COMMON_CONVERSIONS['Storm Flood'] = 'Storm or Flood'
 COMMON_CONVERSIONS['Theft Attempted Theft'] = 'Theft or Attempted Theft'
+
+#
+# Default Coverage Categories
+#
+default_coverage_categories = [
+    {"NAME": "Primary Coverages", "TYPE": "clause_category", "LABEL": "PrimaryCC"},
+    {"NAME": "Optional Coverages", "TYPE": "clause_category", "LABEL": "OptCC"}
+]

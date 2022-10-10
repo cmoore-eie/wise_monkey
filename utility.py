@@ -6,7 +6,7 @@ from json import JSONDecodeError
 
 import config
 from product_shapes import dropdown_to_dict, is_related
-from constants import MARKERS, JSON_KEYS
+from constants import Markers, JsonKeys
 import pandas as pd
 
 
@@ -24,7 +24,7 @@ def add_xmind_attributes(topic, json_object):
     :parameter json_object json containing the object structure
     """
 
-    attributes = json_object[JSON_KEYS['attributes']]
+    attributes = json_object[JsonKeys.attributes.value]
     attribute_no_category(attributes, topic, json_object)
     attribute_with_category(attributes, topic, json_object)
 
@@ -33,7 +33,7 @@ def attribute_no_category(attributes, topic, json_object):
     """Add attributes that don't have a corresponding category"""
     for attribute in attributes:
         if not (is_related(json_object, attribute['NAME'])):
-            if JSON_KEYS['category'] not in attribute:
+            if JsonKeys.category.value not in attribute:
                 add_attribute(attribute, topic, json_object)
 
 
@@ -44,10 +44,10 @@ def attribute_with_category(attributes, topic, json_object):
     categories then add the attributes to the corresponding
     category
     """
-    if JSON_KEYS['attribute_category'] in json_object.keys():
+    if JsonKeys.attribute_category.value in json_object.keys():
         question_category_topic = add_question_categories(topic, json_object)
         for attribute in attributes:
-            if JSON_KEYS['category'] in attribute.keys():
+            if JsonKeys.category.value in attribute.keys():
                 if not (is_related(json_object, attribute['NAME'])):
                     add_attribute(attribute, topic, json_object, question_category_topic)
 
@@ -65,12 +65,12 @@ def add_question_categories(topic, json_object) -> dict:
     :parameter category_key The key to the category section, 'Attribute Category', 'Line Attribute Category'
     """
     question_category_topic = dict()
-    if JSON_KEYS['attribute_category'] in json_object.keys():
-        question_categories = json_object[JSON_KEYS['attribute_category']]
+    if JsonKeys.attribute_category.value in json_object.keys():
+        question_categories = json_object[JsonKeys.attribute_category.value]
         for question_category in question_categories:
             item = topic.addSubTopic()
             item.setTitle(question_category['NAME'])
-            item.addMarker(MARKERS[question_category['TYPE']])
+            item.addMarker(Markers[question_category['TYPE']].value)
             if 'LABEL' in question_category.keys():
                 item.addLabel(question_category['LABEL'])
             question_category_topic[question_category['NAME']] = item
@@ -79,12 +79,12 @@ def add_question_categories(topic, json_object) -> dict:
 
 def add_coverage_categories(topic, json_object) -> dict:
     coverage_category_topic = dict()
-    if JSON_KEYS['coverage_category'] in json_object.keys():
-        coverage_categories = json_object[JSON_KEYS['coverage_category']]
+    if JsonKeys.coverage_category.value in json_object.keys():
+        coverage_categories = json_object[JsonKeys.coverage_category.value]
         for coverage_category in coverage_categories:
             item = topic.addSubTopic()
             item.setTitle(coverage_category['NAME'])
-            item.addMarker(MARKERS[coverage_category['TYPE']])
+            item.addMarker(Markers[coverage_category['TYPE']].value)
             if 'LABEL' in coverage_category.keys():
                 item.addLabel(coverage_category['LABEL'])
             coverage_category_topic[coverage_category['NAME']] = item
@@ -113,33 +113,33 @@ def process_dropdown_items(dropdown_data, item, attribute, json_object):
             item_option = item.addSubTopic()
             item_option.setTitle(dropdown_value['NAME'])
             if 'TYPE' in dropdown_value.keys():
-                item_option.addMarker(MARKERS[dropdown_value['TYPE']])
+                item_option.addMarker(Markers[dropdown_value['TYPE']].value)
             else:
-                item_option.addMarker(MARKERS['text'])
+                item_option.addMarker(Markers.text.value)
             if 'LABEL' in dropdown_value.keys():
                 item_option.addLabel(dropdown_value['LABEL'])
             extract_related(json_object, attribute['NAME'], dropdown_value['NAME'], item_option)
         else:
             item_option = item.addSubTopic()
             item_option.setTitle(dropdown_value)
-            item_option.addMarker(MARKERS['text'])
+            item_option.addMarker(Markers.text.value)
             extract_related(json_object, attribute['NAME'], dropdown_value, item_option)
 
 
 def add_attribute(attribute, topic, json_object, question_category_topic=None):
     copy_topic = topic
-    if JSON_KEYS['category'] in attribute.keys():
+    if JsonKeys.category.value in attribute.keys():
         if question_category_topic is not None:
-            if JSON_KEYS['category'] in attribute.keys():
-                copy_topic = question_category_topic[attribute[JSON_KEYS['category']]]
+            if JsonKeys.category.value in attribute.keys():
+                copy_topic = question_category_topic[attribute[JsonKeys.category.value]]
 
     item = copy_topic.addSubTopic()
     item.setTitle(attribute['NAME'])
-    item.addMarker(MARKERS[attribute['TYPE']])
+    item.addMarker(Markers[attribute['TYPE']].value)
     if 'LABEL' in attribute.keys():
         item.addLabel(attribute['LABEL'])
-    if JSON_KEYS['attributes'] in attribute.keys():
-        for attribute_attribute in attribute[JSON_KEYS['attributes']]:
+    if JsonKeys.attributes.value in attribute.keys():
+        for attribute_attribute in attribute[JsonKeys.attributes.value]:
             add_attribute(attribute_attribute, item, json_object)
 
     if attribute['TYPE'] == 'dropdown':
@@ -160,7 +160,7 @@ def add_xmind_coverages(coverages, json_object, topic):
     :parameter topic (topic) The base topic to attach the coverages to
     :parameter category_key The dictionary key for the coverage categories
     """
-    if JSON_KEYS['coverage_category'] in json_object.keys():
+    if JsonKeys.coverage_category.value in json_object.keys():
         coverage_categories = add_coverage_categories(topic, json_object)
         for coverage in coverages:
             if 'CATEGORY' in coverage:
@@ -175,7 +175,7 @@ def add_xmind_coverages(coverages, json_object, topic):
 def build_coverage(topic_to_use, coverage, json_object):
     new_coverage = topic_to_use.addSubTopic()
     new_coverage.setTitle(coverage['NAME'])
-    new_coverage.addMarker(MARKERS['coverage'])
+    new_coverage.addMarker(Markers.coverage.value)
     if 'LABEL' in coverage.keys():
         new_coverage.addLabel(coverage['LABEL'])
 
@@ -189,10 +189,10 @@ def build_coverage(topic_to_use, coverage, json_object):
 
 
 def extract_related(json_object, parent, link, topic):
-    if JSON_KEYS['related'] not in json_object.keys():
+    if JsonKeys.related.value not in json_object.keys():
         return
-    related = json_object[JSON_KEYS['related']]
-    attributes = json_object[JSON_KEYS['attributes']]
+    related = json_object[JsonKeys.related.value]
+    attributes = json_object[JsonKeys.attributes.value]
     for relationship in related:
         if relationship['PARENT'] == parent and relationship['LINK'] == link:
             for attribute in attributes:
@@ -237,10 +237,13 @@ def load_phrase_files():
 
     file_path = f'{config.json_store_location}{store_item}'
     if os.path.exists(file_path):
-        with open(file_path) as json_file:
-            list_items = json.load(json_file)['Phrases']
-            for item in list_items:
-                config.matcher_phrases.append(item['NAME'])
+        try:
+            with open(file_path) as json_file:
+                list_items = json.load(json_file)['Phrases']
+                for item in list_items:
+                    config.matcher_phrases.append(item['NAME'])
+        except JSONDecodeError:
+            ...
 
 
 def write_tokens(doc):

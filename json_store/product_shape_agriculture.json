@@ -113,7 +113,8 @@
         {"NAME": "Horse Single Coverages", "TYPE": "clause_category", "LABEL": "HorseSingleCC"},
         {"NAME": "Horse Group Coverages", "TYPE": "clause_category", "LABEL": "HorseGroupleCC"},
         {"NAME": "Other Animal Coverages", "TYPE": "clause_category", "LABEL": "OtherAnimalCC"},
-        {"NAME": "Optional Coverages", "TYPE": "clause_category", "LABEL": "BldgOptCC"}
+        {"NAME": "Optional Coverages", "TYPE": "clause_category", "LABEL": "OptCC"},
+        {"NAME": "Primary Coverages", "TYPE": "clause_category", "LABEL": "PrimaryCC"}
     ],
       "COVERAGES": [
         {"NAME": "Fire, soot, electricity", "CATEGORY": "Pig Coverages"},
