@@ -3,8 +3,10 @@ import getopt
 import sys
 import time
 import config
+import constants
 import logo
 import pdf_processor
+import xmind_2_json_shape
 from constants import GeneralConstants
 from system_settings import read_system_settings, fetch_languages, fetch_language_codes, fetch_language_file_codes
 from utility import wise_monkey_says, load_shape_files, wise_monkey_says_oops
@@ -52,20 +54,34 @@ def main(argv):
             print(f"({error_item}) : {process_errors[error_item]}")
     else:
         config.read_configuration(config_file)
-        if 'input_document' in config.config_dict[GeneralConstants.base_information.value].keys():
-            config.input_document = config.config_dict[GeneralConstants.base_information.value]['input_document']
+        config.set_input_files()
 
         set_json_store()
         fetch_system_settings()
-        set_language()
-        set_language_file()
-        set_product_shape()
+        if config.process_type == constants.ProcessType.to_xmind:
+            process_to_xmind()
+        if config.process_type == constants.ProcessType.from_xmind:
+            process_from_xmind()
 
-        pdf_processor.process()
-        config.end_process_time = time.perf_counter()
-        elapsed = config.end_process_time - config.start_process_time
-        elapsed_format = '{:.2f}'.format(elapsed)
-        wise_monkey_says(f'For Reference the process took {elapsed_format} seconds')
+
+def process_from_xmind():
+    xmind_2_json_shape.process_from_xmind()
+    config.end_process_time = time.perf_counter()
+    elapsed = config.end_process_time - config.start_process_time
+    elapsed_format = '{:.2f}'.format(elapsed)
+    wise_monkey_says(f'For Reference the process took {elapsed_format} seconds')
+
+
+def process_to_xmind():
+    set_language()
+    set_language_file()
+    set_product_shape()
+
+    pdf_processor.process()
+    config.end_process_time = time.perf_counter()
+    elapsed = config.end_process_time - config.start_process_time
+    elapsed_format = '{:.2f}'.format(elapsed)
+    wise_monkey_says(f'For Reference the process took {elapsed_format} seconds')
 
 
 def fetch_system_settings():

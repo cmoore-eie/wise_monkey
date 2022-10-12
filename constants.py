@@ -8,6 +8,11 @@ of overwriting the values in code
 from enum import Enum
 
 
+class ProcessType(Enum):
+    to_xmind = 'json to xmind'
+    from_xmind = 'xmind to json'
+
+
 class GeneralConstants(Enum):
     version_number = '0.4'
     base_information = 'Base Information'
@@ -24,6 +29,10 @@ class JsonKeys(Enum):
     risk_objects = 'RISK_OBJECTS'
     category = 'CATEGORY'
     line = "LINE"
+    label = 'LABEL'
+    name = 'NAME'
+    type = 'TYPE'
+    options = 'OPTIONS'
 
 
 #
