@@ -30,7 +30,7 @@ def apply_shape(line, coverages=None):
         risk_object_attribute = risk_object.addSubTopic()
         risk_object_attribute.setTitle("Attributes")
 
-        if JsonKeys.attributes in json_risk_object.keys():
+        if JsonKeys.attributes.value in json_risk_object.keys():
             utility.add_xmind_attributes(risk_object_attribute, json_risk_object)
 
         risk_object_coverage = risk_object.addSubTopic()
@@ -48,8 +48,8 @@ def apply_shape(line, coverages=None):
         risk_object_conditions_category.setTitle("Standard Conditions")
         risk_object_conditions_category.addMarker(Markers.clause_category.value)
 
-        if JsonKeys.coverages in json_risk_object.keys() and coverages is None:
-            coverages = json_risk_object[JsonKeys.coverages]
+        if JsonKeys.coverages.value in json_risk_object.keys() and coverages is None:
+            coverages = json_risk_object[JsonKeys.coverages.value]
 
         utility.add_xmind_coverages(coverages, json_risk_object, risk_object_coverage)
 
@@ -114,9 +114,9 @@ def is_related(json_object, child) -> bool:
     :parameter child the attribute to search for
     :return bool False if the child is not related otherwise it will return True
     """
-    if JsonKeys.related not in json_object.keys():
+    if JsonKeys.related.value not in json_object.keys():
         return False
-    related = json_object[JsonKeys.related]
+    related = json_object[JsonKeys.related.value]
     for relationship in related:
         if relationship['CHILD'] == child:
             return True

@@ -1,13 +1,24 @@
 {
   "LINE": {
-    "ATTRIBUTES": [],
-    "ATTRIBUTE_CATEGORY": [],
+    "ATTRIBUTES": [
+      {"NAME": "Have you  ever been refused insurance or had insurance cancelled?", "TYPE": "boolean", "LABEL": "RefusedInsurance", "CATEGORY": "General Questions"},
+      {"NAME": "Have you ever been subject to any form of Bankruptcy proceedings ?", "TYPE": "boolean", "LABEL": "DeclaredBankrupt", "CATEGORY": "General Questions"},
+      {"NAME": "Have you ever been convicted of any non motoring criminal offence, or do you have any prosecutions pending?", "TYPE": "boolean", "LABEL": "AnyNonMotorCriminalConvictions", "CATEGORY": "General Questions"},
+      {"NAME": "Customer Segment", "TYPE": "dropdown", "LABEL": "TypeOfHome", "CATEGORY": "General Questions", "OPTIONS": [
+        {"NAME": "Bronze", "TYPE": "text", "LABEL": "BronzeHome"},
+        {"NAME": "Silver", "TYPE": "text", "LABEL": "SilverHome"},
+        {"NAME": "Gold", "TYPE": "text", "LABEL": "GoldHome"}
+      ]}
+    ],
+    "ATTRIBUTE_CATEGORY": [
+      {"NAME": "General Questions", "TYPE": "attribute_category"}
+    ],
     "COVERAGE_CATEGORY": [
       {"NAME": "Liability Clauses", "TYPE": "clause_category", "LABEL": "LiabilityCC"}
     ],
     "COVERAGES": [
       {"NAME": "Public Liability", "CATEGORY": "Liability Clauses", "LABEL": "PublicLiabCov", "TERMS": [
-        {"NAME": "Limit", "TYPE": "dropdown", "LABEL": "PersLiabLimit", "OPTIONS": [
+        {"NAME": "Limit", "TYPE": "dropdown", "LABEL": "PublicLiabilityLimit", "OPTIONS": [
           {"NAME": "500000", "TYPE": "money", "LABEL": "FiveHundredMille"},
           {"NAME": "1000000", "TYPE": "money", "LABEL": "OneMillion"},
           {"NAME": "1500000", "TYPE": "money", "LABEL": "OneAndHalfMillion"},
@@ -32,73 +43,6 @@
   },
   "RISK_OBJECTS": [
     {"NAME": "Property", "TYPE": "risk_object", "LABEL":  "PropertyProtection",
-      "ATTRIBUTES": [
-        {"NAME": "Property Address", "LABEL": "PropAddress", "TYPE": "location"},
-        {"NAME": "What Type of Property is it", "LABEL":" MyPropertyType", "TYPE": "dropdown", "OPTIONS": [
-            {"NAME": "Detached House", "TYPE": "text"},
-            {"NAME": "Semi detached House", "TYPE": "text"},
-            {"NAME": "Detached Bungalow", "TYPE": "text"},
-            {"NAME": "Semi detached Bungalow", "TYPE": "text"},
-            {"NAME": "Flat/Maisonette above Ground Floor", "TYPE": "text"},
-            {"NAME": "Flat/Maisonette Ground Floor", "TYPE": "text"},
-            {"NAME": "Mid Terraced House", "TYPE": "text"},
-            {"NAME": "End of Terrace House", "TYPE": "text"}
-        ]},
-        {"NAME": "Has this address ever sustained loss or damage by flood, subsidence, heave or landslip?", "TYPE": "boolean", "LABEL": "LossFloodSubsHeaveLandslip", "CATEGORY": "Loss History"},
-        {"NAME": "During the last 5 years  have you  made a claim or suffered an uninsured loss?", "TYPE": "boolean", "LABEL": "ClaimLastFiveYears", "CATEGORY": "Loss History"},
-        {"NAME": "Loss History Other", "TYPE": "exposure", "LABEL": "LossHistOther", "CATEGORY": "Loss History", "ATTRIBUTES":[
-          {"NAME": "Type of Loss", "TYPE": "dropdown", "LABEL": "TypesLoss", "CATEGORY": "Loss History", "OPTIONS": [
-            {"NAME": "Fire", "LABEL": "FireLoss", "TYPE": "text"},
-            {"NAME": "Water Damage", "LABEL": "WaterDamageLoss", "TYPE": "text"},
-            {"NAME": "Burglary", "LABEL": "BurglaryLoss", "TYPE": "text"},
-            {"NAME": "Storm", "LABEL": "StormLoss", "TYPE": "text"}
-          ]}
-        ]},
-        {"NAME": "Number of Bedrooms", "TYPE" : "dropdown", "LABEL": "NumberBedrooms", "CATEGORY": "General", "LIST": "Number Bedrooms"},
-        {"NAME": "Number of Rooms", "TYPE" : "dropdown", "LABEL": "NumberRooms",  "CATEGORY": "General", "LIST": "Number Rooms"},
-        {"NAME": "Does the property have a cellar or basement", "TYPE": "boolean", "LABEL": "Basement", "CATEGORY": "General"},
-        {"NAME": "Does the property have a swimming pool", "TYPE": "boolean", "LABEL": "SwimmingPool", "CATEGORY": "General"},
-        {"NAME": "When was the property built?", "TYPE": "number", "LABEL":  "YearBuilt", "CATEGORY": "General"},
-        {"NAME": "What is the wall  construction?", "TYPE": "dropdown", "LABEL": "WallConstruction", "CATEGORY": "Construction", "LIST": "Wall Construction"},
-        {"NAME": "What is the roof construction?", "TYPE": "dropdown", "LABEL": "RoofConstruction", "CATEGORY": "Construction", "LIST": "Roof Construction"},
-        {"NAME": "What is the thatch material of your roof?", "TYPE": "text", "LABEL": "ThatchMaterial", "CATEGORY": "Construction"},
-        {"NAME": "Has the roof been sprayed with one of the following fire retardant sprays?", "TYPE": "dropdown", "LABEL": "ThatchSprayed", "CATEGORY": "Construction"},
-        {"NAME": "Year roof sprayed with fire retardant.", "TYPE": "date_time", "LABEL": "ThatchSprayedYear", "CATEGORY": "Construction"},
-        {"NAME": "Is the roof protected with Thatch Firewall?", "TYPE": "boolean", "LABEL": "ThatchFirewall", "CATEGORY": "Construction"},
-        {"NAME": "How many of each of the following heating types do you have in your home", "TYPE": "dropdown", "LABEL": "WallConstruction", "CATEGORY": "Construction"},
-        {"NAME": "Do you have any Woodburning or Multifuel stoves in your home?", "TYPE": "boolean", "LABEL": "WoodburningStoves", "CATEGORY": "Construction"},
-        {"NAME": "Heating type", "TYPE": "dropdown", "LABEL": "HeatingType", "CATEGORY": "Construction"},
-        {"NAME": "What material is the flue lined with?", "TYPE": "text", "LABEL": "FlueMaterial", "CATEGORY": "Construction"},
-        {"NAME": "Has a chimney heat detection system been fitted?", "TYPE": "boolean", "LABEL": "ChimneyDetectionSyste", "CATEGORY": "Construction"},
-        {"NAME": "Who Occupies the Property", "TYPE": "dropdown", "LIST": "Occupancy", "LABEL": "Occupancy", "CATEGORY": "Occupancy questions"},
-        {"NAME": "How long is the Property normally occupied", "TYPE": "dropdown", "LIST": "Occupied", "LABEL": "Occupied", "CATEGORY": "Occupancy questions"},
-        {"NAME": "What type of locks are the majority of external doors fitted with", "TYPE": "text", "LABEL": "DoorType", "CATEGORY": "Security"},
-        {"NAME": "Are all accessible windows, fanlights and skylights fitted with key operated locks?", "TYPE": "boolean", "LABEL":  "Window Locks", "CATEGORY": "Security"},
-        {"NAME": "Do you have CCTV at the property to be insured", "TYPE": "dropdown", "LIST": "Yes No", "LABEL": "CCTV", "CATEGORY": "Security"},
-        {"NAME": "Does the CCTV system have remote internet monitoring?", "TYPE": "boolean", "LABEL": "CCTVMonitoring", "CATEGORY": "Security"},
-        {"NAME": "Which areas are covered", "TYPE": "text", "LABEL": "CCTVAreaCovered", "CATEGORY": "Security"},
-        {"NAME": "Is there an intruder alarm in full and effective operation?", "TYPE": "dropdown", "LIST": "Yes No", "LABEL": "Alarm", "CATEGORY": "Security"},
-        {"NAME": "Is it maintained under contract by a registered installer?", "TYPE": "boolean", "LABEL": "AlarmInstallerMaintained", "CATEGORY": "Security"},
-        {"NAME": "Is there a police response or professional key holder response provided by the system?", "TYPE": "boolean", "LABEL": "AlarmResponse", "CATEGORY": "Security"},
-        {"NAME": "Have any of the buildings at the home, including the outbuildings:Suffered any structural damage, structural repair or underpinning?", "TYPE": "boolean", "LABEL": "StructuralRepair", "CATEGORY": "Subsidence Questions"},
-        {"NAME": "Have any of the buildings at the home, including the outbuildings:Any signs of internal or external cracks?", "TYPE": "boolean", "LABEL": "Cracking", "CATEGORY": "Subsidence Questions"},
-        {"NAME": "Have any of the buildings at the home, including the outbuildings: Been monitored for subsidence or movement?", "TYPE": "boolean", "LABEL": "Subsidence", "CATEGORY": "Subsidence Questions"}
-      ],
-      "RELATED": [
-        {"PARENT": "What is the roof construction?", "CHILD": "What is the thatch material of your roof?", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "Has the roof been sprayed with one of the following fire retardant sprays?", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "Year roof sprayed with fire retardant.", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "Is the roof protected with Thatch Firewall?", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "How many of each of the following heating types do you have in your home", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "Do you have any Woodburning or Multifuel stoves in your home?", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "Heating type", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "What material is the flue lined with?", "LINK": "Thatch - Reed"},
-        {"PARENT": "What is the roof construction?", "CHILD": "Has a chimney heat detection system been fitted?", "LINK": "Thatch - Reed"},
-        {"PARENT": "Do you have CCTV at the property to be insured", "CHILD": "Does the CCTV system have remote internet monitoring?", "LINK": "Yes"},
-        {"PARENT": "Do you have CCTV at the property to be insured", "CHILD": "Which areas are covered", "LINK": "Yes"},
-        {"PARENT": "Is there an intruder alarm in full and effective operation?", "CHILD": "Is it maintained under contract by a registered installer?", "LINK": "Yes"},
-        {"PARENT": "Is there an intruder alarm in full and effective operation?", "CHILD": "Is there a police response or professional key holder response provided by the system?", "LINK": "Yes"}
-      ],
       "ATTRIBUTE_CATEGORY": [
         {"NAME": "Loss History", "TYPE": "attribute_category"},
         {"NAME": "General", "TYPE": "attribute_category"},
@@ -106,6 +50,65 @@
         {"NAME": "Occupancy questions", "TYPE": "attribute_category"},
         {"NAME": "Security", "TYPE": "attribute_category"},
         {"NAME": "Subsidence Questions", "TYPE": "attribute_category"}
+      ],
+      "ATTRIBUTES": [
+        {"NAME": "Property Address", "LABEL": "PropAddress", "TYPE": "location"},
+        {"NAME": "Has this address ever sustained loss or damage by flood, subsidence, heave or landslip?", "TYPE": "boolean", "LABEL": "LossFloodSubsHeaveLandslip", "CATEGORY": "Loss History"},
+        {"NAME": "During the last 5 years  have you  made a claim or suffered an uninsured loss? ", "TYPE": "boolean", "LABEL": "ClaimLastFiveYears", "CATEGORY": "Loss History"},
+        {"NAME": "Loss History Other", "TYPE": "exposure", "LABEL": "LossHistOther", "CATEGORY": "Loss History", "ATTRIBUTES": [
+          {"NAME": "Type of Loss", "LABEL": "TypesLoss", "OPTIONS": [
+            {"NAME": "Fire", "LABEL": "FireLoss", "TYPE": "text"},
+            {"NAME": "Water Damage", "LABEL": "WaterDamageLoss", "TYPE": "text"},
+            {"NAME": "Burglary", "LABEL": "BurglaryLoss", "TYPE": "text"},
+            {"NAME": "Storm", "LABEL": "StormLoss", "TYPE": "text"}
+          ]},
+          {"NAME": "Date", "LABEL": "LossDateOther", "TYPE": "date_time"},
+          {"NAME": "Amount", "LABEL": "LossAmountOther", "TYPE": "money"}
+        ]},
+        {"NAME": "What Type of Property is it", "LABEL": "PropertyType", "TYPE": "dropdown", "OPTIONS": [
+          {"NAME": "Detached House", "TYPE": "text", "LABEL": "DetachedHouse"},
+          {"NAME": "Semi detached House", "TYPE": "text", "LABEL": "SemiDetachedHouse"},
+          {"NAME": "Detached Bungalow", "TYPE": "text", "LABEL": "DetachedBungalow"},
+          {"NAME": "Semi detached Bungalow", "TYPE": "text", "LABEL": "SemiDetachedBungalow"},
+          {"NAME": "Flat/Maisonette above Ground Floor", "TYPE": "text", "LABEL": "FlatMaisonetteAboveGroundFloor"},
+          {"NAME": "Flat/Maisonette Ground Floor", "TYPE": "text", "LABEL": "FlatMaisonetteGroundFloor"},
+          {"NAME": "Mid Terraced House", "TYPE": "text", "LABEL": "MidTerraceHouse"},
+          {"NAME": "End of Terrace House", "TYPE": "text", "LABEL": "EndTerraceHouse"}
+        ]},
+        {"NAME": "Number of Bedrooms", "TYPE": "dropdown", "LABEL": "NumBedrooms", "CATEGORY": "General", "OPTIONS": [
+          {"NAME": "Up to 2", "TYPE": "text", "LABEL": "UpTo2"},
+          {"NAME": "Three", "TYPE": "text", "LABEL": "ThreeBedrooms"},
+          {"NAME": "Four", "TYPE": "text", "LABEL": "FourBedrooms"},
+          {"NAME": "Five", "TYPE": "text", "LABEL": "FiveBedrooms"},
+          {"NAME": "Six", "TYPE": "text", "LABEL": "SixBedrooms"},
+          {"NAME": "More than 6", "TYPE": "text", "LABEL": "GTSixBedrooms"}
+        ]},
+        {"NAME": "Number of Rooms", "TYPE": "dropdown", "LABEL": "NumRooms", "CATEGORY": "General", "OPTIONS": [
+          {"NAME": "Up to 2", "TYPE": "text", "LABEL": "UpTo2rooms"},
+          {"NAME": "Three", "TYPE": "text", "LABEL": "ThreeRooms"},
+          {"NAME": "Four", "TYPE": "text", "LABEL": "FourRooms"},
+          {"NAME": "Five", "TYPE": "text", "LABEL": "FiveRooms"},
+          {"NAME": "Six", "TYPE": "text", "LABEL": "SixRooms"},
+          {"NAME": "More than 6", "TYPE": "text", "LABEL": "GTSixRooms"}
+        ]},
+        {"NAME": "Does the property have a cellar or basement", "TYPE":  "boolean", "LABEL": "CellarOrBasement", "CATEGORY": "General"},
+        {"NAME": "Does the property have a swimming pool", "TYPE":  "boolean", "LABEL": "SwimmingPool", "CATEGORY": "General"},
+        {"NAME": "When was the property built?", "TYPE":  "date_time", "LABEL": "WhenPropBuilt", "CATEGORY": "General"},
+        {"NAME": "Are there any other parties with an interest in this property?", "TYPE":  "boolean", "LABEL": "ThirdPartyInterests", "CATEGORY": "General"},
+        {"NAME": "What is the wall  construction?", "TYPE": "dropdown", "CATEGORY": "Construction", "LABEL": "WallConstruction", "OPTIONS": [
+          {"NAME": "Brick", "TYPE": "text", "LABEL": "BrickWall"},
+          {"NAME": "Brick and stone", "TYPE": "text", "LABEL": "BrickStoneWall"},
+          {"NAME": "Timber Frame/Brick", "TYPE": "text", "LABEL": "TimberFrameBrickWall"},
+          {"NAME": "Cob Construction", "TYPE": "text", "LABEL": "CobWall"},
+          {"NAME": "Concrete", "TYPE": "text", "LABEL": "ConcreteWall"},
+          {"NAME": "Corrugated Iron", "TYPE": "text", "LABEL": "CorrIronWall"},
+          {"NAME": "Flint", "TYPE": "text", "LABEL": "FlintWall"},
+          {"NAME": "Glass", "TYPE": "text", "LABEL": "GlassWall"},
+          {"NAME": "Metal", "TYPE": "text", "LABEL": "MetalWall"},
+          {"NAME": "Timber Frame/Stone", "TYPE": "text", "LABEL": "TimberStoneWall"},
+          {"NAME": "Timber Frame/Timber", "TYPE": "text", "LABEL": "TimberWall"},
+          {"NAME": "Straw Bale", "TYPE": "text", "LABEL": "StrawWall"}
+        ]}
       ],
       "COVERAGE_CATEGORY": [
         {"NAME": "Primary Coverages", "TYPE": "clause_category", "LABEL": "BldgCC"},

@@ -124,17 +124,17 @@ def build_sheet(sheet1, coverages):
 
     line_attribute = line.addSubTopic()
     line_attribute.setTitle("Attributes")
-    if JsonKeys['line'] in config.shape_dict.keys():
-        json_line_object = config.shape_dict[JsonKeys['line']]
-        if JsonKeys['attributes'] in json_line_object.keys():
+    if JsonKeys.line.value in config.shape_dict.keys():
+        json_line_object = config.shape_dict[JsonKeys.line.value]
+        if JsonKeys.attributes.value in json_line_object.keys():
             add_xmind_attributes(line_attribute, json_line_object)
 
         line_coverage = line.addSubTopic()
         line_coverage.setTitle("Coverages")
 
         if len(config.input_document) == 0:
-            if JsonKeys['coverages'] in json_line_object.keys():
-                coverages = json_line_object[JsonKeys['coverages']]
+            if JsonKeys.coverages.value in json_line_object.keys():
+                coverages = json_line_object[JsonKeys.coverages.value]
                 add_xmind_coverages(coverages, json_line_object, line_coverage)
 
     line_exclusions = line.addSubTopic()
