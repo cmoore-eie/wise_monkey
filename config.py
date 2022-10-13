@@ -5,6 +5,7 @@ Importing the module will bring the variables into scope of other
 modules.
 """
 import configparser
+import os
 import sys
 
 from constants import ProcessType, GeneralConstants
@@ -60,7 +61,14 @@ def set_input_files():
     process_type = ProcessType.to_xmind
     if 'input_xmind_document' in config_dict[GeneralConstants.base_information.value].keys():
         input_xmind_document = config_dict[GeneralConstants.base_information.value]['input_xmind_document']
-        process_type = ProcessType.from_xmind
+        if os.path.isdir(config_dict[GeneralConstants.base_information.value]['input_xmind_document']):
+            process_type = ProcessType.from_xmind_bulk
+        elif os.path.isfile(config_dict[GeneralConstants.base_information.value]['input_xmind_document']):
+            process_type = ProcessType.from_xmind
+        else:
+            wise_monkey_says_oops('The input file is not pointing to a file or directory')
+            wise_monkey_says_oops('we will have to stop the process and have a banana break')
+            sys.exit(1)
 
     if len(input_document) > 0 and len(input_xmind_document) > 0:
         wise_monkey_says_oops(f'You are trying to be greedy, I can only allow one input file either pdf or xmind')

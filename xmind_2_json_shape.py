@@ -1,19 +1,18 @@
 import json
 import xmind
-import config
 from constants import JsonKeys, Markers
 from xmind_structure import XmindBase
 
 
-def process_from_xmind():
-    read_xmind_output_json()
+def process_from_xmind(input_document_path):
+    read_xmind_output_json(input_document_path)
 
 
 # Method that does all the work and your entry point
 # into reading the xmind
-def read_xmind_output_json():
+def read_xmind_output_json(input_document_path):
     # Load mindmap
-    workbook = xmind.load(config.input_xmind_document)
+    workbook = xmind.load(input_document_path)
 
     # Assume only one sheet
     sheet = workbook.getPrimarySheet()
@@ -21,7 +20,7 @@ def read_xmind_output_json():
     xmind_product = sheet.getRootTopic()
     product = XmindBase()
     process_product(product, xmind_product)
-    output_json(product)
+    output_json(product, input_document_path)
 
 
 def process_product(xmind_base: XmindBase, xmind_token):
@@ -93,8 +92,8 @@ def create_attribute(xmind_topic, attribute_type: Markers, json_object: XmindBas
 
 
 # Call method to print to CLI and file
-def output_json(product):
-    output_file_path = config.input_xmind_document.replace('.xmind', '.json')
+def output_json(product, input_document_path):
+    output_file_path = input_document_path.replace('.xmind', '.json')
     json_dict = to_json(product)
     json_string = json.dumps(json_dict)
     with open(output_file_path, "w") as json_file:

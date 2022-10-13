@@ -5,6 +5,7 @@ import config
 import constants
 import logo
 import pdf_processor
+import glob
 import xmind_2_json_shape
 from constants import GeneralConstants
 from system_settings import read_system_settings, fetch_language_codes, fetch_language_file_codes
@@ -61,10 +62,24 @@ def main(argv):
             process_to_xmind()
         if config.process_type == constants.ProcessType.from_xmind:
             process_from_xmind()
+        if config.process_type == constants.ProcessType.from_xmind_bulk:
+            process_from_xmind_bulk()
 
 
 def process_from_xmind():
-    xmind_2_json_shape.process_from_xmind()
+    xmind_2_json_shape.process_from_xmind(config.input_xmind_document)
+    config.end_process_time = time.perf_counter()
+    elapsed = config.end_process_time - config.start_process_time
+    elapsed_format = '{:.2f}'.format(elapsed)
+    wise_monkey_says(f'For Reference the process took {elapsed_format} seconds')
+
+
+def process_from_xmind_bulk():
+    file_search = config.input_xmind_document + "/*.xmind"
+    file_list = glob.glob(file_search)
+    for file in file_list:
+        wise_monkey_says(f'I am typeing as fast as I can to generate json from {file} ')
+        xmind_2_json_shape.process_from_xmind(file)
     config.end_process_time = time.perf_counter()
     elapsed = config.end_process_time - config.start_process_time
     elapsed_format = '{:.2f}'.format(elapsed)

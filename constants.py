@@ -11,6 +11,7 @@ from enum import Enum
 class ProcessType(Enum):
     to_xmind = 'json to xmind'
     from_xmind = 'xmind to json'
+    from_xmind_bulk = 'bulk xmind to json'
 
 
 class GeneralConstants(Enum):
