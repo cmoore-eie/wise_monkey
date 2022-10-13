@@ -144,7 +144,7 @@ def process():
     """ Main processing function
 
     Processes the PDF file if it is available, this will first perform phrase matching
-    then apply rules matching to derive a set of coverages. When there is not input file
+    then apply rules matching to derive a set of coverages. When there is no input file
     given the mind map will correspond to the product shape defined in the configuration
     file.
 

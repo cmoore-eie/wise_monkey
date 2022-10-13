@@ -125,7 +125,11 @@ def build_sheet(sheet1, coverages):
     line_attribute = line.addSubTopic()
     line_attribute.setTitle("Attributes")
     if JsonKeys.line.value in config.shape_dict.keys():
-        json_line_object = config.shape_dict[JsonKeys.line.value]
+        line_values = config.shape_dict[JsonKeys.line.value]
+        if type(line_values) is list:
+            json_line_object = line_values[0]
+        else:
+            json_line_object = line_values
         if JsonKeys.attributes.value in json_line_object.keys():
             add_xmind_attributes(line_attribute, json_line_object)
 
@@ -134,8 +138,8 @@ def build_sheet(sheet1, coverages):
 
         if len(config.input_document) == 0:
             if JsonKeys.coverages.value in json_line_object.keys():
-                coverages = json_line_object[JsonKeys.coverages.value]
-                add_xmind_coverages(coverages, json_line_object, line_coverage)
+                line_coverages = json_line_object[JsonKeys.coverages.value]
+                add_xmind_coverages(line_coverages, json_line_object, line_coverage)
 
     line_exclusions = line.addSubTopic()
     line_exclusions.setTitle("Exclusions")

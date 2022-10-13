@@ -1,4 +1,3 @@
-import configparser
 import getopt
 import sys
 import time
@@ -8,7 +7,7 @@ import logo
 import pdf_processor
 import xmind_2_json_shape
 from constants import GeneralConstants
-from system_settings import read_system_settings, fetch_languages, fetch_language_codes, fetch_language_file_codes
+from system_settings import read_system_settings, fetch_language_codes, fetch_language_file_codes
 from utility import wise_monkey_says, load_shape_files, wise_monkey_says_oops
 
 process_errors = dict()

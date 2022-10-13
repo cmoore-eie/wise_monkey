@@ -1,158 +1,1019 @@
 {
-  "LINE": {
-    "ATTRIBUTES": [
-      {"NAME": "Have you  ever been refused insurance or had insurance cancelled?", "TYPE": "boolean", "LABEL": "RefusedInsurance", "CATEGORY": "General Questions"},
-      {"NAME": "Have you ever been subject to any form of Bankruptcy proceedings ?", "TYPE": "boolean", "LABEL": "DeclaredBankrupt", "CATEGORY": "General Questions"},
-      {"NAME": "Have you ever been convicted of any non motoring criminal offence, or do you have any prosecutions pending?", "TYPE": "boolean", "LABEL": "AnyNonMotorCriminalConvictions", "CATEGORY": "General Questions"},
-      {"NAME": "Customer Segment", "TYPE": "dropdown", "LABEL": "TypeOfHome", "CATEGORY": "General Questions", "OPTIONS": [
-        {"NAME": "Bronze", "TYPE": "text", "LABEL": "BronzeHome"},
-        {"NAME": "Silver", "TYPE": "text", "LABEL": "SilverHome"},
-        {"NAME": "Gold", "TYPE": "text", "LABEL": "GoldHome"}
-      ]}
-    ],
-    "ATTRIBUTE_CATEGORY": [
-      {"NAME": "General Questions", "TYPE": "attribute_category"}
-    ],
-    "COVERAGE_CATEGORY": [
-      {"NAME": "Liability Clauses", "TYPE": "clause_category", "LABEL": "LiabilityCC"}
-    ],
-    "COVERAGES": [
-      {"NAME": "Public Liability", "CATEGORY": "Liability Clauses", "LABEL": "PublicLiabCov", "TERMS": [
-        {"NAME": "Limit", "TYPE": "dropdown", "LABEL": "PublicLiabilityLimit", "OPTIONS": [
-          {"NAME": "500000", "TYPE": "money", "LABEL": "FiveHundredMille"},
-          {"NAME": "1000000", "TYPE": "money", "LABEL": "OneMillion"},
-          {"NAME": "1500000", "TYPE": "money", "LABEL": "OneAndHalfMillion"},
-          {"NAME": "2000000", "TYPE": "money", "LABEL": "TwoMillion"}
-        ]}
-      ]},
-      {"NAME": "Domestic Employers Liability", "CATEGORY": "Liability Clauses", "LABEL": "DomEmplLiabCov", "TERMS": [
-        {"NAME": "Indemnity Limit", "TYPE": "dropdown", "LABEL": "EmpLiabIndemLimit", "OPTIONS": [
-          {"NAME": "1,000,000", "LABEL": "TenMillion"}
-        ]},
-      {"NAME": "Employment Information", "TYPE": "risk_object", "LABEL": "EmployInfor","ATTRIBUTES": [
-        {"NAME": "Employee Type", "TYPE": "dropdown", "LABEL": "EmplType", "OPTIONS": [
-          {"NAME": "Housekeepers", "LABEL": "Housekeepers"},
-          {"NAME": "Gardeners", "LABEL": "Gardeners"},
-          {"NAME": "Cleaners", "LABEL": "Cleaners"}
-        ]},
-        {"NAME": "Number of Employees", "TYPE": "number", "LABEL": "NumEmploy"},
-        {"NAME": "Total Annual Wages", "TYPE": "money", "LABEL": "TotAnnualWages"}
-      ]}
-    ]}
-  ]
-  },
-  "RISK_OBJECTS": [
-    {"NAME": "Property", "TYPE": "risk_object", "LABEL":  "PropertyProtection",
+  "LINE": [
+    {
       "ATTRIBUTE_CATEGORY": [
-        {"NAME": "Loss History", "TYPE": "attribute_category"},
-        {"NAME": "General", "TYPE": "attribute_category"},
-        {"NAME": "Construction", "TYPE": "attribute_category"},
-        {"NAME": "Occupancy questions", "TYPE": "attribute_category"},
-        {"NAME": "Security", "TYPE": "attribute_category"},
-        {"NAME": "Subsidence Questions", "TYPE": "attribute_category"}
-      ],
-      "ATTRIBUTES": [
-        {"NAME": "Property Address", "LABEL": "PropAddress", "TYPE": "location"},
-        {"NAME": "Has this address ever sustained loss or damage by flood, subsidence, heave or landslip?", "TYPE": "boolean", "LABEL": "LossFloodSubsHeaveLandslip", "CATEGORY": "Loss History"},
-        {"NAME": "During the last 5 years  have you  made a claim or suffered an uninsured loss? ", "TYPE": "boolean", "LABEL": "ClaimLastFiveYears", "CATEGORY": "Loss History"},
-        {"NAME": "Loss History Other", "TYPE": "exposure", "LABEL": "LossHistOther", "CATEGORY": "Loss History", "ATTRIBUTES": [
-          {"NAME": "Type of Loss", "LABEL": "TypesLoss", "OPTIONS": [
-            {"NAME": "Fire", "LABEL": "FireLoss", "TYPE": "text"},
-            {"NAME": "Water Damage", "LABEL": "WaterDamageLoss", "TYPE": "text"},
-            {"NAME": "Burglary", "LABEL": "BurglaryLoss", "TYPE": "text"},
-            {"NAME": "Storm", "LABEL": "StormLoss", "TYPE": "text"}
-          ]},
-          {"NAME": "Date", "LABEL": "LossDateOther", "TYPE": "date_time"},
-          {"NAME": "Amount", "LABEL": "LossAmountOther", "TYPE": "money"}
-        ]},
-        {"NAME": "What Type of Property is it", "LABEL": "PropertyType", "TYPE": "dropdown", "OPTIONS": [
-          {"NAME": "Detached House", "TYPE": "text", "LABEL": "DetachedHouse"},
-          {"NAME": "Semi detached House", "TYPE": "text", "LABEL": "SemiDetachedHouse"},
-          {"NAME": "Detached Bungalow", "TYPE": "text", "LABEL": "DetachedBungalow"},
-          {"NAME": "Semi detached Bungalow", "TYPE": "text", "LABEL": "SemiDetachedBungalow"},
-          {"NAME": "Flat/Maisonette above Ground Floor", "TYPE": "text", "LABEL": "FlatMaisonetteAboveGroundFloor"},
-          {"NAME": "Flat/Maisonette Ground Floor", "TYPE": "text", "LABEL": "FlatMaisonetteGroundFloor"},
-          {"NAME": "Mid Terraced House", "TYPE": "text", "LABEL": "MidTerraceHouse"},
-          {"NAME": "End of Terrace House", "TYPE": "text", "LABEL": "EndTerraceHouse"}
-        ]},
-        {"NAME": "Number of Bedrooms", "TYPE": "dropdown", "LABEL": "NumBedrooms", "CATEGORY": "General", "OPTIONS": [
-          {"NAME": "Up to 2", "TYPE": "text", "LABEL": "UpTo2"},
-          {"NAME": "Three", "TYPE": "text", "LABEL": "ThreeBedrooms"},
-          {"NAME": "Four", "TYPE": "text", "LABEL": "FourBedrooms"},
-          {"NAME": "Five", "TYPE": "text", "LABEL": "FiveBedrooms"},
-          {"NAME": "Six", "TYPE": "text", "LABEL": "SixBedrooms"},
-          {"NAME": "More than 6", "TYPE": "text", "LABEL": "GTSixBedrooms"}
-        ]},
-        {"NAME": "Number of Rooms", "TYPE": "dropdown", "LABEL": "NumRooms", "CATEGORY": "General", "OPTIONS": [
-          {"NAME": "Up to 2", "TYPE": "text", "LABEL": "UpTo2rooms"},
-          {"NAME": "Three", "TYPE": "text", "LABEL": "ThreeRooms"},
-          {"NAME": "Four", "TYPE": "text", "LABEL": "FourRooms"},
-          {"NAME": "Five", "TYPE": "text", "LABEL": "FiveRooms"},
-          {"NAME": "Six", "TYPE": "text", "LABEL": "SixRooms"},
-          {"NAME": "More than 6", "TYPE": "text", "LABEL": "GTSixRooms"}
-        ]},
-        {"NAME": "Does the property have a cellar or basement", "TYPE":  "boolean", "LABEL": "CellarOrBasement", "CATEGORY": "General"},
-        {"NAME": "Does the property have a swimming pool", "TYPE":  "boolean", "LABEL": "SwimmingPool", "CATEGORY": "General"},
-        {"NAME": "When was the property built?", "TYPE":  "date_time", "LABEL": "WhenPropBuilt", "CATEGORY": "General"},
-        {"NAME": "Are there any other parties with an interest in this property?", "TYPE":  "boolean", "LABEL": "ThirdPartyInterests", "CATEGORY": "General"},
-        {"NAME": "What is the wall  construction?", "TYPE": "dropdown", "CATEGORY": "Construction", "LABEL": "WallConstruction", "OPTIONS": [
-          {"NAME": "Brick", "TYPE": "text", "LABEL": "BrickWall"},
-          {"NAME": "Brick and stone", "TYPE": "text", "LABEL": "BrickStoneWall"},
-          {"NAME": "Timber Frame/Brick", "TYPE": "text", "LABEL": "TimberFrameBrickWall"},
-          {"NAME": "Cob Construction", "TYPE": "text", "LABEL": "CobWall"},
-          {"NAME": "Concrete", "TYPE": "text", "LABEL": "ConcreteWall"},
-          {"NAME": "Corrugated Iron", "TYPE": "text", "LABEL": "CorrIronWall"},
-          {"NAME": "Flint", "TYPE": "text", "LABEL": "FlintWall"},
-          {"NAME": "Glass", "TYPE": "text", "LABEL": "GlassWall"},
-          {"NAME": "Metal", "TYPE": "text", "LABEL": "MetalWall"},
-          {"NAME": "Timber Frame/Stone", "TYPE": "text", "LABEL": "TimberStoneWall"},
-          {"NAME": "Timber Frame/Timber", "TYPE": "text", "LABEL": "TimberWall"},
-          {"NAME": "Straw Bale", "TYPE": "text", "LABEL": "StrawWall"}
-        ]}
+        {
+          "NAME": "General Questions",
+          "TYPE": "attribute_category"
+        }
       ],
       "COVERAGE_CATEGORY": [
-        {"NAME": "Primary Coverages", "TYPE": "clause_category", "LABEL": "BldgCC"},
-        {"NAME": "Optional Coverages", "TYPE": "clause_category", "LABEL": "BldgOptCC"}
+        {
+          "NAME": "Liability Clauses",
+          "TYPE": "clause_category"
+        }
+      ],
+      "ATTRIBUTES": [
+        {
+          "NAME": "Have you  ever been refused insurance or had insurance cancelled?",
+          "TYPE": "boolean",
+          "LABEL": "RefusedInsurance",
+          "CATEGORY": "General Questions"
+        },
+        {
+          "NAME": "Have you ever been subject to any form of Bankruptcy proceedings ?",
+          "TYPE": "boolean",
+          "LABEL": "DeclaredBankrupt",
+          "CATEGORY": "General Questions"
+        },
+        {
+          "NAME": "Have you ever been convicted of any non motoring criminal offence, or do you have any prosecutions pending?",
+          "TYPE": "boolean",
+          "LABEL": "AnyNonMotorCriminalConvictions",
+          "CATEGORY": "General Questions"
+        },
+        {
+          "NAME": "Customer Segment",
+          "TYPE": "dropdown",
+          "LABEL": "TypeOfHome",
+          "CATEGORY": "General Questions",
+          "OPTIONS": [
+            {
+              "NAME": "Bronze",
+              "TYPE": "text",
+              "LABEL": "BronzeHome"
+            },
+            {
+              "NAME": "Silver",
+              "TYPE": "text",
+              "LABEL": "SilverHome"
+            },
+            {
+              "NAME": "Gold",
+              "TYPE": "text",
+              "LABEL": "GoldHome"
+            }
+          ]
+        }
       ],
       "COVERAGES": [
-        {"NAME": "Buildings", "CATEGORY": "Primary Coverages", "TERMS": [
-          {"NAME": "Domestic Employers Liability", "TYPE": "money"},
-          {"NAME": "Compulsory Excess", "TYPE": "money"},
-          {"NAME": "Voluntary Excess", "TYPE": "dropdown"},
-          {"NAME": "Escape of Water Excess", "TYPE": "money"},
-          {"NAME": "Subsidence Excess", "TYPE": "money"},
-          {"NAME": "Theft Excess", "TYPE": "money"}
-        ]},
-        {"NAME": "Contents", "CATEGORY": "Primary Coverages", "TERMS": [
-          {"NAME": "Sum Insured", "TYPE": "money"},
-          {"NAME": "Cover required for contents away from home?", "TYPE": "boolean"},
-          {"NAME": "Compulsory Excess", "TYPE": "money"},
-          {"NAME": "Voluntary Excess", "TYPE": "dropdown"},
-          {"NAME": "Escape of Water Excess", "TYPE": "money"},
-          {"NAME": "Subsidence Excess", "TYPE": "money"},
-          {"NAME": "Theft excess", "TYPE": "money"},
-          {"NAME": "High Value Items", "TYPE": "risk_object", "ATTRIBUTES": [
-            {"NAME": "Item to be insured", "TYPE": "dropdown"},
-            {"NAME": "Description", "TYPE": "text"},
-            {"NAME": "Replacement cost", "TYPE": "boolean"},
-            {"NAME": "Is this item anchored to the ground?", "TYPE": "boolean"}
-          ]}
-        ]},
-        {"NAME": "Home Emergency", "CATEGORY": "Optional Coverages", "LABEL": "HomeEmergency", "TERMS": [
-          {"NAME": "Sum Insured", "TYPE": "money", "LABEL": "HomeEmerSI"},
-          {"NAME": "Excess", "TYPE": "dropdown", "LABEL": "HomeEmerExcess", "OPTIONS": [
-            {"NAME": "25", "TYPE": "money", "LABEL": "TwentyFive"},
-            {"NAME": "50", "TYPE": "money", "LABEL": "Fifty"}
-          ]}
-        ]},
-        {"NAME": "Personal Legal Expenses", "CATEGORY": "Optional Coverages", "LABEL": "PersLegalExpCov" ,"TERMS": [
-          {"NAME": "Limit", "TYPE": "dropdown", "LABEL": "PersLegalExpLimit", "OPTIONS": [
-            {"NAME": "25000", "TYPE": "money", "LABEL": "TwentyFiveThousand"},
-            {"NAME": "50000", "TYPE": "money", "LABEL": "FiftyThousand"}
-          ]}
-        ]}
+        {
+          "NAME": "Public Liability",
+          "TYPE": "coverage",
+          "CATEGORY": "Liability Clauses",
+          "TERMS": [
+            {
+              "NAME": "Limit",
+              "TYPE": "dropdown",
+              "LABEL": "PersLiabLimit",
+              "OPTIONS": [
+                {
+                  "NAME": "500000",
+                  "TYPE": "money",
+                  "LABEL": "FiveHundredMille"
+                },
+                {
+                  "NAME": "1000000",
+                  "TYPE": "money",
+                  "LABEL": "OneMillion"
+                },
+                {
+                  "NAME": "1500000",
+                  "TYPE": "money",
+                  "LABEL": "OneAndHalfMillion"
+                },
+                {
+                  "NAME": "2000000",
+                  "TYPE": "money",
+                  "LABEL": "TwoMillion"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "Domestic Employers Liability",
+          "TYPE": "coverage",
+          "CATEGORY": "Liability Clauses",
+          "TERMS": [
+            {
+              "NAME": "Indemnity Limit",
+              "TYPE": "dropdown",
+              "LABEL": "EmpLiabIndemLimit",
+              "OPTIONS": [
+                {
+                  "NAME": "1,000,000",
+                  "TYPE": "money",
+                  "LABEL": "TenMillion"
+                }
+              ]
+            },
+            {
+              "NAME": "Employment Information",
+              "TYPE": "risk_object",
+              "LABEL": "EmployInfor",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "Employee Type",
+                  "TYPE": "dropdown",
+                  "LABEL": "EmplType",
+                  "OPTIONS": [
+                    {
+                      "NAME": "Housekeepers",
+                      "TYPE": "text",
+                      "LABEL": "Housekeepers"
+                    },
+                    {
+                      "NAME": "Gardeners",
+                      "TYPE": "text",
+                      "LABEL": "Gardeners"
+                    },
+                    {
+                      "NAME": "Cleaners",
+                      "TYPE": "text",
+                      "LABEL": "Cleaners"
+                    }
+                  ]
+                },
+                {
+                  "NAME": "Number of Employees",
+                  "TYPE": "number",
+                  "LABEL": "NumEmploy"
+                },
+                {
+                  "NAME": "Total Annual Wages",
+                  "TYPE": "money",
+                  "LABEL": "TotAnnualWages"
+                }
+              ]
+            }
+          ]
+        }
       ]
-    
+    }
+  ],
+  "RISK_OBJECTS": [
+    {
+      "NAME": "Property ",
+      "TYPE": "risk_object",
+      "ATTRIBUTE_CATEGORY": [
+        {
+          "NAME": "Loss History",
+          "TYPE": "attribute_category"
+        },
+        {
+          "NAME": "General",
+          "TYPE": "attribute_category"
+        },
+        {
+          "NAME": "Construction",
+          "TYPE": "attribute_category"
+        },
+        {
+          "NAME": "Occupancy questions",
+          "TYPE": "attribute_category"
+        },
+        {
+          "NAME": "Security ",
+          "TYPE": "attribute_category"
+        }
+      ],
+      "COVERAGE_CATEGORY": [
+        {
+          "NAME": "Primary Coverages",
+          "TYPE": "clause_category"
+        },
+        {
+          "NAME": "Optional Coverages",
+          "TYPE": "clause_category"
+        }
+      ],
+      "ATTRIBUTES": [
+        {
+          "NAME": "Property Address",
+          "TYPE": "location",
+          "LABEL": "PropAddress"
+        },
+        {
+          "NAME": "What Type of Property is it",
+          "TYPE": "dropdown",
+          "LABEL": "MyPropertyType",
+          "OPTIONS": [
+            {
+              "NAME": "Detached House",
+              "TYPE": "text",
+              "LABEL": "DetachedHouse"
+            },
+            {
+              "NAME": "Semi detached House",
+              "TYPE": "text",
+              "LABEL": "SemiDetachedHouse"
+            },
+            {
+              "NAME": "Detached Bungalow",
+              "TYPE": "text",
+              "LABEL": "DetachedBungalow"
+            },
+            {
+              "NAME": "Semi detached Bungalow",
+              "TYPE": "text",
+              "LABEL": "SemiDetachedBungalow"
+            },
+            {
+              "NAME": "Flat/Maisonette above Ground Floor",
+              "TYPE": "text",
+              "LABEL": "FlatMaisonetteAboveGroundFloor"
+            },
+            {
+              "NAME": "Flat/Maisonette Ground Floor",
+              "TYPE": "text",
+              "LABEL": "FlatMaisonetteGroundFloor"
+            },
+            {
+              "NAME": "Mid Terraced House",
+              "TYPE": "text",
+              "LABEL": "MidTerraceHouse"
+            },
+            {
+              "NAME": "End of Terrace House",
+              "TYPE": "text",
+              "LABEL": "EndTerraceHouse"
+            }
+          ]
+        },
+        {
+          "NAME": "Has this address ever sustained loss or damage by flood, subsidence, heave or landslip?",
+          "TYPE": "boolean",
+          "LABEL": "LossFloodSubsHeaveLandslip",
+          "CATEGORY": "Loss History"
+        },
+        {
+          "NAME": "During the last 5 years  have you  made a claim or suffered an uninsured loss?",
+          "TYPE": "boolean",
+          "LABEL": "ClaimLastFiveYears",
+          "CATEGORY": "Loss History"
+        },
+        {
+          "NAME": "Loss History Other",
+          "TYPE": "exposure",
+          "LABEL": "LossHistOther",
+          "CATEGORY": "Loss History",
+          "ATTRIBUTES": [
+            {
+              "NAME": "Type of Loss",
+              "TYPE": "dropdown",
+              "LABEL": "TypesLoss",
+              "OPTIONS": [
+                {
+                  "NAME": "Fire",
+                  "TYPE": "text",
+                  "LABEL": "FireLoss"
+                },
+                {
+                  "NAME": "Water Damage",
+                  "TYPE": "text",
+                  "LABEL": "WaterDamageLoss"
+                },
+                {
+                  "NAME": "Burglary",
+                  "TYPE": "text",
+                  "LABEL": "BurglaryLoss"
+                },
+                {
+                  "NAME": "Storm",
+                  "TYPE": "text",
+                  "LABEL": "StormLoss"
+                }
+              ]
+            },
+            {
+              "NAME": "Date",
+              "TYPE": "date_time",
+              "LABEL": "LossDateOther"
+            },
+            {
+              "NAME": "Amount",
+              "TYPE": "money",
+              "LABEL": "LossAmountOther"
+            }
+          ]
+        },
+        {
+          "NAME": "Number of Bedrooms",
+          "TYPE": "dropdown",
+          "LABEL": "NumBedrooms",
+          "CATEGORY": "General",
+          "OPTIONS": [
+            {
+              "NAME": "Up to 2",
+              "TYPE": "text",
+              "LABEL": "UpTo2"
+            },
+            {
+              "NAME": "Three",
+              "TYPE": "text",
+              "LABEL": "ThreeBedrooms"
+            },
+            {
+              "NAME": "Four",
+              "TYPE": "text",
+              "LABEL": "FourBedrooms"
+            },
+            {
+              "NAME": "Five",
+              "TYPE": "text",
+              "LABEL": "FiveBedrooms"
+            },
+            {
+              "NAME": "Six",
+              "TYPE": "text",
+              "LABEL": "SixBedrooms"
+            },
+            {
+              "NAME": "More than 6",
+              "TYPE": "text",
+              "LABEL": "GTSixBedrooms"
+            }
+          ]
+        },
+        {
+          "NAME": "Number of rooms",
+          "TYPE": "dropdown",
+          "LABEL": "Numrooms",
+          "CATEGORY": "General",
+          "OPTIONS": [
+            {
+              "NAME": "Up to 2",
+              "TYPE": "text",
+              "LABEL": "UpTo2rooms"
+            },
+            {
+              "NAME": "Three",
+              "TYPE": "text",
+              "LABEL": "ThreeRooms"
+            },
+            {
+              "NAME": "Four",
+              "TYPE": "text",
+              "LABEL": "FourRooms"
+            },
+            {
+              "NAME": "Five",
+              "TYPE": "text",
+              "LABEL": "FiveRooms"
+            },
+            {
+              "NAME": "Six",
+              "TYPE": "text",
+              "LABEL": "SixRooms"
+            },
+            {
+              "NAME": "More than 6",
+              "TYPE": "text",
+              "LABEL": "GTSixRooms"
+            }
+          ]
+        },
+        {
+          "NAME": "Does the property have a cellar or basement",
+          "TYPE": "boolean",
+          "LABEL": "CellarOrBasement",
+          "CATEGORY": "General"
+        },
+        {
+          "NAME": "Does the property have a swimming pool",
+          "TYPE": "boolean",
+          "LABEL": "SwimmingPool",
+          "CATEGORY": "General"
+        },
+        {
+          "NAME": "When was the property built?",
+          "TYPE": "date_time",
+          "LABEL": "WhenPropBuilt",
+          "CATEGORY": "General"
+        },
+        {
+          "NAME": "Are there any other parties with an interest in this property?",
+          "TYPE": "boolean",
+          "LABEL": "ThirdPartyInterests",
+          "CATEGORY": "General"
+        },
+        {
+          "NAME": "What is the wall  construction?",
+          "TYPE": "dropdown",
+          "LABEL": "WallConstruction",
+          "CATEGORY": "Construction",
+          "OPTIONS": [
+            {
+              "NAME": "Brick",
+              "TYPE": "text",
+              "LABEL": "BrickWall"
+            },
+            {
+              "NAME": "Brick and stone",
+              "TYPE": "text",
+              "LABEL": "BrickStoneWall"
+            },
+            {
+              "NAME": "Timber Frame/Brick",
+              "TYPE": "text",
+              "LABEL": "TimberFrameBrickWall"
+            },
+            {
+              "NAME": "Cob Construction",
+              "TYPE": "text",
+              "LABEL": "CobWall"
+            },
+            {
+              "NAME": "Concrete",
+              "TYPE": "text",
+              "LABEL": "ConcreteWall"
+            },
+            {
+              "NAME": "Corrugated Iron",
+              "TYPE": "text",
+              "LABEL": "CorrIronWall"
+            },
+            {
+              "NAME": "Flint",
+              "TYPE": "text",
+              "LABEL": "FlintWall"
+            },
+            {
+              "NAME": "Glass",
+              "TYPE": "text",
+              "LABEL": "GlassWall"
+            },
+            {
+              "NAME": "Metal",
+              "TYPE": "text",
+              "LABEL": "MetalWall"
+            },
+            {
+              "NAME": "Timber Frame/Stone",
+              "TYPE": "text",
+              "LABEL": "TimberStoneWall"
+            },
+            {
+              "NAME": "Timber Frame/Timber",
+              "TYPE": "text",
+              "LABEL": "TimberWall"
+            },
+            {
+              "NAME": "Straw Bale",
+              "TYPE": "text",
+              "LABEL": "StrawWall"
+            }
+          ]
+        },
+        {
+          "NAME": "What is the roof construction?",
+          "TYPE": "dropdown",
+          "LABEL": "RoofConstruction",
+          "CATEGORY": "Construction",
+          "OPTIONS": [
+            {
+              "NAME": "Asphalt",
+              "TYPE": "text",
+              "LABEL": "Asphalt"
+            },
+            {
+              "NAME": "Other",
+              "TYPE": "text",
+              "LABEL": "OtherRoofConstr"
+            },
+            {
+              "NAME": "Asbestos",
+              "TYPE": "text",
+              "LABEL": "AsbestosRoof"
+            },
+            {
+              "NAME": "Concrete",
+              "TYPE": "text",
+              "LABEL": "ConcreteRoof"
+            },
+            {
+              "NAME": "Corrugated Iron",
+              "TYPE": "text",
+              "LABEL": "CorrugatedIronRoof"
+            },
+            {
+              "NAME": "Felt On Timber",
+              "TYPE": "text",
+              "LABEL": "FeltTimberRoof"
+            },
+            {
+              "NAME": "Fibreglass",
+              "TYPE": "text",
+              "LABEL": "FibreglassRoof"
+            },
+            {
+              "NAME": "Thatch - Reed",
+              "TYPE": "text",
+              "LABEL": "ThatchReed",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "Describe the thatch material on your roof?",
+                  "TYPE": "text",
+                  "LABEL": "WhatThatchOnRoof"
+                },
+                {
+                  "NAME": "Has the roof been sprayed with  fire retardant sprays?",
+                  "TYPE": "dropdown",
+                  "LABEL": "ThatchFireRetardantSpray"
+                },
+                {
+                  "NAME": "Year roof sprayed with fire retardant.",
+                  "TYPE": "date_time",
+                  "LABEL": "YearFireRetSprayed"
+                },
+                {
+                  "NAME": "Do you have any Woodburning or Multifuel stoves in your home?",
+                  "TYPE": "boolean",
+                  "LABEL": "WoodMultiFuelStoves"
+                },
+                {
+                  "NAME": "Has a chimney heat detection system been fitted?",
+                  "TYPE": "boolean",
+                  "LABEL": "ChimneyHeatDetectionSystem"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "Is the Property Unoccupied",
+          "TYPE": "dropdown",
+          "LABEL": "Unoccupied",
+          "CATEGORY": "Occupancy questions",
+          "OPTIONS": [
+            {
+              "NAME": "No",
+              "TYPE": "text",
+              "LABEL": "UnoccNo"
+            },
+            {
+              "NAME": "Yes",
+              "TYPE": "text",
+              "LABEL": "UnoccYes",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "Will the property be unoccupied for more than 3 months",
+                  "TYPE": "boolean",
+                  "LABEL": "UnoccupMoreThanThreeMonths"
+                },
+                {
+                  "NAME": "Have all the valuable items been removed from the property",
+                  "TYPE": "boolean",
+                  "LABEL": "AllValuablesRemoved"
+                },
+                {
+                  "NAME": "Is the property inspected at least once a week by you or an authorised person",
+                  "TYPE": "boolean",
+                  "LABEL": "InspectedOnceAWeek"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "Who Occupies the Property",
+          "TYPE": "dropdown",
+          "LABEL": "WhoOccupiesProperty",
+          "CATEGORY": "Occupancy questions",
+          "OPTIONS": [
+            {
+              "NAME": "Tenants who are relatives",
+              "TYPE": "text",
+              "LABEL": "OccupyYouFamilyLodgers"
+            },
+            {
+              "NAME": "You and your family",
+              "TYPE": "text",
+              "LABEL": "OccupyYouFamily"
+            },
+            {
+              "NAME": "Tenants who are not relatives",
+              "TYPE": "text",
+              "LABEL": "OccupyNonImmedRelativeEmployee"
+            }
+          ]
+        },
+        {
+          "NAME": "How long is the Property normally occupied",
+          "TYPE": "dropdown",
+          "LABEL": "HowLongPropNormallyOccup",
+          "CATEGORY": "Occupancy questions",
+          "OPTIONS": [
+            {
+              "NAME": "Usually occupied during the day",
+              "TYPE": "text",
+              "LABEL": "OccupDuringDay"
+            },
+            {
+              "NAME": "Usually occupied at night",
+              "TYPE": "text",
+              "LABEL": "OccupAtNight"
+            },
+            {
+              "NAME": "Usually occupied day and night",
+              "TYPE": "text",
+              "LABEL": "OccupDayAndNight"
+            },
+            {
+              "NAME": "Holiday/Weekend use only",
+              "TYPE": "text",
+              "LABEL": "HolidayWeekendOnly"
+            }
+          ]
+        },
+        {
+          "NAME": "Are all of the external doors fitted with a multilever mortice deadlock,",
+          "TYPE": "dropdown",
+          "LABEL": "DoorLocks",
+          "CATEGORY": "Security ",
+          "OPTIONS": [
+            {
+              "NAME": "Yes",
+              "TYPE": "text"
+            },
+            {
+              "NAME": "No",
+              "TYPE": "text",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "What type of locks are the majority of external doors fitted with?",
+                  "TYPE": "text",
+                  "LABEL": "ExternalLocks"
+                },
+                {
+                  "NAME": "Other lock details",
+                  "TYPE": "text",
+                  "LABEL": "OtherLockDet"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "Are all accessible windows, fanlights and skylights fitted with key operated locks?",
+          "TYPE": "boolean",
+          "LABEL": "FanSkylightLocks",
+          "CATEGORY": "Security "
+        },
+        {
+          "NAME": "Do you have CCTV at the property to be insured",
+          "TYPE": "dropdown",
+          "LABEL": "CCTVInsurance",
+          "CATEGORY": "Security ",
+          "OPTIONS": [
+            {
+              "NAME": "Yes",
+              "TYPE": "text",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "Does it Comply with BS8418 and installed by a NDS/SSAIB installer",
+                  "TYPE": "boolean",
+                  "LABEL": "CCTVComply"
+                },
+                {
+                  "NAME": "Does the CCTV system have remote internet monitoring?",
+                  "TYPE": "boolean",
+                  "LABEL": "RemoteInternetMonitoring"
+                },
+                {
+                  "NAME": "Which areas are covered",
+                  "TYPE": "text",
+                  "LABEL": "WhichAreasCovered"
+                }
+              ]
+            },
+            {
+              "NAME": "No",
+              "TYPE": "text"
+            }
+          ]
+        },
+        {
+          "NAME": "Does the CCTV system have remote internet monitoring?",
+          "TYPE": "boolean",
+          "LABEL": "CCTVRemMon",
+          "CATEGORY": "Security "
+        },
+        {
+          "NAME": "Do you have security gates",
+          "TYPE": "boolean",
+          "LABEL": "SecurityGates",
+          "CATEGORY": "Security "
+        },
+        {
+          "NAME": "Is there an intruder alarm in full and effective operation?",
+          "TYPE": "dropdown",
+          "LABEL": "IntruderAlarm",
+          "CATEGORY": "Security ",
+          "OPTIONS": [
+            {
+              "NAME": "Yes",
+              "TYPE": "text",
+              "LABEL": "AlarmYes",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "Is it maintained under contract ?",
+                  "TYPE": "boolean",
+                  "LABEL": "AlarmUnderContract"
+                },
+                {
+                  "NAME": "Is there a police response or professional key holder response provided by the system?",
+                  "TYPE": "boolean",
+                  "LABEL": "AlarmPoliceResponse"
+                },
+                {
+                  "NAME": "Who responds otherwise?",
+                  "TYPE": "text",
+                  "LABEL": "WhoResponds"
+                }
+              ]
+            },
+            {
+              "NAME": "No",
+              "TYPE": "text",
+              "LABEL": "AlarmNo"
+            }
+          ]
+        }
+      ],
+      "COVERAGES": [
+        {
+          "NAME": "Buildings",
+          "TYPE": "coverage",
+          "CATEGORY": "Primary Coverages",
+          "TERMS": [
+            {
+              "NAME": "Sum Insured",
+              "TYPE": "money",
+              "LABEL": "BldgSumInsured"
+            },
+            {
+              "NAME": "Compulsory Excess",
+              "TYPE": "money",
+              "LABEL": "BldgCompExcess"
+            },
+            {
+              "NAME": "Voluntary Excess",
+              "TYPE": "dropdown",
+              "LABEL": "BldgVolunExcess",
+              "OPTIONS": [
+                {
+                  "NAME": "50",
+                  "TYPE": "money",
+                  "LABEL": "Fifty"
+                },
+                {
+                  "NAME": "100",
+                  "TYPE": "money",
+                  "LABEL": "OneHundred"
+                },
+                {
+                  "NAME": "250",
+                  "TYPE": "money",
+                  "LABEL": "TwoFity"
+                },
+                {
+                  "NAME": "500",
+                  "TYPE": "money",
+                  "LABEL": "FiveHundred"
+                },
+                {
+                  "NAME": "1000",
+                  "TYPE": "money",
+                  "LABEL": "Mille"
+                },
+                {
+                  "NAME": "1500",
+                  "TYPE": "money",
+                  "LABEL": "MilleFiveHundred"
+                },
+                {
+                  "NAME": "2000",
+                  "TYPE": "money",
+                  "LABEL": "TwoMille"
+                }
+              ]
+            },
+            {
+              "NAME": "Escape of Water Excess",
+              "TYPE": "money",
+              "LABEL": "BldgEscapeWaterExcess"
+            },
+            {
+              "NAME": "Subsidence Excess",
+              "TYPE": "money",
+              "LABEL": "BldgSubsidenceExcess"
+            },
+            {
+              "NAME": "Theft Excess",
+              "TYPE": "money",
+              "LABEL": "BldgTheftExcess"
+            }
+          ]
+        },
+        {
+          "NAME": "Contents",
+          "TYPE": "coverage",
+          "CATEGORY": "Primary Coverages",
+          "TERMS": [
+            {
+              "NAME": "Sum Insured",
+              "TYPE": "money",
+              "LABEL": "ContentsSumIns"
+            },
+            {
+              "NAME": "Cover required for contents away from home?",
+              "TYPE": "boolean",
+              "LABEL": "ContentsAwayFromHome"
+            },
+            {
+              "NAME": "Compulsory Excess",
+              "TYPE": "money",
+              "LABEL": "ContentsCompExcess"
+            },
+            {
+              "NAME": "Voluntary Excess",
+              "TYPE": "dropdown",
+              "LABEL": "ContentsVolExcess",
+              "OPTIONS": [
+                {
+                  "NAME": "100",
+                  "TYPE": "money",
+                  "LABEL": "VolExcOneHundred"
+                },
+                {
+                  "NAME": "150",
+                  "TYPE": "money",
+                  "LABEL": "VolExcOneHundredFifty"
+                },
+                {
+                  "NAME": "200",
+                  "TYPE": "money",
+                  "LABEL": "VolExcTwoHundred"
+                },
+                {
+                  "NAME": "250",
+                  "TYPE": "money",
+                  "LABEL": "VolExcTwoHundredFifty"
+                }
+              ]
+            },
+            {
+              "NAME": "Escape of Water Excess",
+              "TYPE": "money",
+              "LABEL": "ContentsEscapeWaterExcess"
+            },
+            {
+              "NAME": "Subsidence excess",
+              "TYPE": "money",
+              "LABEL": "ContSubXs"
+            },
+            {
+              "NAME": "Theft excess",
+              "TYPE": "money",
+              "LABEL": "ContTftXs"
+            },
+            {
+              "NAME": "High Value Items",
+              "TYPE": "risk_object",
+              "LABEL": "ContGardenEquip",
+              "ATTRIBUTES": [
+                {
+                  "NAME": "Item to be insured",
+                  "TYPE": "dropdown",
+                  "LABEL": "GardenSpecItemType",
+                  "OPTIONS": [
+                    {
+                      "NAME": "Garden Furn or Equip",
+                      "TYPE": "text",
+                      "LABEL": "GardenFurnEquip"
+                    },
+                    {
+                      "NAME": "Hot Tub",
+                      "TYPE": "text",
+                      "LABEL": "HotTub"
+                    },
+                    {
+                      "NAME": "Garden statue",
+                      "TYPE": "text",
+                      "LABEL": "GardenStatue"
+                    },
+                    {
+                      "NAME": "Audio Equipment",
+                      "TYPE": "text",
+                      "LABEL": "AudioEquip"
+                    },
+                    {
+                      "NAME": "Clocks",
+                      "TYPE": "text",
+                      "LABEL": "Clocks"
+                    },
+                    {
+                      "NAME": "Collection",
+                      "TYPE": "text",
+                      "LABEL": "Collection"
+                    },
+                    {
+                      "NAME": "Furs",
+                      "TYPE": "text",
+                      "LABEL": "Furs"
+                    },
+                    {
+                      "NAME": "Painting/Works of art",
+                      "TYPE": "text",
+                      "LABEL": "PaintingWorksOfArt"
+                    },
+                    {
+                      "NAME": "Jewellery",
+                      "TYPE": "text",
+                      "LABEL": "Jewellery"
+                    },
+                    {
+                      "NAME": "Watches",
+                      "TYPE": "text",
+                      "LABEL": "Watches"
+                    }
+                  ]
+                },
+                {
+                  "NAME": "Description",
+                  "TYPE": "text",
+                  "LABEL": "GardenItemDesc"
+                },
+                {
+                  "NAME": "Replacement cost",
+                  "TYPE": "money",
+                  "LABEL": "ReplacementCost"
+                },
+                {
+                  "NAME": "Is this item anchored to the ground?",
+                  "TYPE": "boolean",
+                  "LABEL": "AnchoredToGround"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "Home Emergency",
+          "TYPE": "coverage",
+          "CATEGORY": "Optional Coverages",
+          "TERMS": [
+            {
+              "NAME": "Sum Insured",
+              "TYPE": "money",
+              "LABEL": "HomeEmerSI"
+            },
+            {
+              "NAME": "Excess",
+              "TYPE": "dropdown",
+              "LABEL": "HomeEmerExcess",
+              "OPTIONS": [
+                {
+                  "NAME": "25",
+                  "TYPE": "money",
+                  "LABEL": "TwentyFive"
+                },
+                {
+                  "NAME": "50",
+                  "TYPE": "money",
+                  "LABEL": "Fifty"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "Personal Legal Expenses",
+          "TYPE": "coverage",
+          "CATEGORY": "Optional Coverages",
+          "TERMS": [
+            {
+              "NAME": "Limit",
+              "TYPE": "dropdown",
+              "LABEL": "PersLegalExpLimit",
+              "OPTIONS": [
+                {
+                  "NAME": "25000",
+                  "TYPE": "money",
+                  "LABEL": "TwentyFiveThousand"
+                },
+                {
+                  "NAME": "50000",
+                  "TYPE": "money",
+                  "LABEL": "FiftyThousand"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
-  }
+}

@@ -33,6 +33,9 @@ class JsonKeys(Enum):
     name = 'NAME'
     type = 'TYPE'
     options = 'OPTIONS'
+    terms = 'TERMS'
+    parent = 'PARENT'
+    link = 'LINK'
 
 
 #

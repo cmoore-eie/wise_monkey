@@ -2,15 +2,9 @@ import json
 import xmind
 import config
 from constants import JsonKeys, Markers
-
-simpleAttributeLabels = [
-    Markers.text.value, Markers.number.value, Markers.boolean.value,
-    Markers.date_time.value, Markers.money.value
-]
+from xmind_structure import XmindBase
 
 
-# main() method to run standalone
-# call readXmind(path) method to call from python
 def process_from_xmind():
     read_xmind_output_json()
 
@@ -24,227 +18,90 @@ def read_xmind_output_json():
     # Assume only one sheet
     sheet = workbook.getPrimarySheet()
 
-    # Root Topic is the product
-    # Not interested in the 'product' for JSON
-    product = sheet.getRootTopic()
-
-    # First sub topic of the product is
-    # the line (assuming there is one and only one line)
-    line = product.getSubTopics()[0]
-
-    # collect risk_objects
-    risk_objects = []
-    for xmind_risk_object in line.getSubTopics():
-        # Markers define an object as a risk object
-        for marker in xmind_risk_object.getMarkers():
-            if marker.getMarkerId() and str(marker.getMarkerId()) == Markers.risk_object.value:
-                risk_objects.append(create_risk_object_from_xmind_ro(xmind_risk_object))
-
-    output_json(risk_objects)
+    xmind_product = sheet.getRootTopic()
+    product = XmindBase()
+    process_product(product, xmind_product)
+    output_json(product)
 
 
-# xmind_risk_object is a xmind Topic
-# This method will build the Risk Object
-# and also all child elements of the risk object
-def create_risk_object_from_xmind_ro(xmind_risk_object):
-    # Basic Attributes
-    risk_object = dict()
-    risk_object[JsonKeys.name.value] = xmind_risk_object.getTitle()
-    risk_object[JsonKeys.type.value] = Markers.risk_object.name
+def process_product(xmind_base: XmindBase, xmind_token):
+    json_object = xmind_base
+    for sub_topics in xmind_token.getSubTopics():
 
-    if xmind_risk_object.getLabels():
-        risk_object[JsonKeys.label.value] = ''.join(xmind_risk_object.getLabels())
+        match find_marker(sub_topics.getMarkers()):
+            case Markers.line:
+                json_object = xmind_base.add_line()
+            case Markers.risk_object:
+                if xmind_base.json_type is not Markers.line:
+                    risk_object = xmind_base.add_object(Markers.risk_object)
+                    create_attribute(sub_topics, Markers.risk_object, risk_object)
+                    if len(sub_topics.getSubTopics()) > 0:
+                        json_object = risk_object
+                else:
+                    json_object = xmind_base.add_risk_object()
+                    json_object.name = sub_topics.getTitle()
+            case Markers.coverage:
+                json_object = xmind_base.add_coverage()
+                json_object.name = sub_topics.getTitle()
+            case Markers.clause_category:
+                json_object = xmind_base.add_clause_category()
+                json_object.name = sub_topics.getTitle()
+            case Markers.attribute_category:
+                json_object = xmind_base.add_attribute_category()
+                json_object.name = sub_topics.getTitle()
+            case Markers.text:
+                attribute = xmind_base.add_object(Markers.text)
+                create_attribute(sub_topics, Markers.text, attribute)
+                if len(sub_topics.getSubTopics()) > 0:
+                    json_object = attribute
+            case Markers.date_time:
+                attribute = xmind_base.add_object(Markers.date_time)
+                create_attribute(sub_topics, Markers.date_time, attribute)
+            case Markers.number:
+                attribute = xmind_base.add_object(Markers.number)
+                create_attribute(sub_topics, Markers.number, attribute)
+            case Markers.money:
+                attribute = xmind_base.add_object(Markers.money)
+                create_attribute(sub_topics, Markers.money, attribute)
+            case Markers.exposure:
+                exposure = xmind_base.add_object(Markers.exposure)
+                create_attribute(sub_topics, Markers.exposure, exposure)
+                if len(sub_topics.getSubTopics()) > 0:
+                    json_object = exposure
+            case Markers.location:
+                attribute = xmind_base.add_object(Markers.location)
+                create_attribute(sub_topics, Markers.location, attribute)
+            case Markers.boolean:
+                attribute = xmind_base.add_object(Markers.boolean)
+                create_attribute(sub_topics, Markers.boolean, attribute)
+            case Markers.dropdown:
+                json_object = xmind_base.add_object(Markers.dropdown)
+                create_attribute(sub_topics, Markers.dropdown, json_object)
 
-    risk_object[JsonKeys.attribute_category.value] = []
-    risk_object[JsonKeys.attributes.value] = []
-    risk_object[JsonKeys.coverage_category.value] = []
-    risk_object[JsonKeys.coverages.value] = []
-
-    # Now for the children
-    if xmind_risk_object.getSubTopics():
-        process_attributes(xmind_risk_object, risk_object)
-        process_coverage_categories(xmind_risk_object, risk_object)
-
-    return risk_object
-
-
-def process_attributes(parent_topic, risk_object):
-    """Process attributes associated to a topic
-
-    The tree is traversed to identify all the attributes, it is assumed
-    all sub-topics will be attributes if they don't have a clause_category
-    as the parent
-    """
-
-    for sub_topic in parent_topic.getSubTopics():
-        attribute_json = dict()
-        if marker_exists(sub_topic.getMarkers(), Markers.clause_category):
-            return
-
-        marker = find_marker(sub_topic.getMarkers())
-
-        if marker is not None:
-
-            attribute_json = create_attribute(sub_topic, marker)
-            if marker == Markers.attribute_category:
-                risk_object[JsonKeys.attribute_category.value].append(attribute_json)
-            else:
-                risk_object[JsonKeys.attributes.value].append(attribute_json)
-
-        if has_subtopics(sub_topic):
-            process_attributes(sub_topic, attribute_json)
-
-
-def check_valid_marker(xmind_topic) -> bool:
-    """Checks for a valid marker
-
-    Valid markers are the Markers defined as needed to process the Json in the
-    json to xmind process. So long as one marker corresponds then it will be True
-    """
-    for marker_to_test in xmind_topic.getMarkers():
-        if str(marker_to_test.getMarkerId()) in [marker.value for marker in Markers]:
-            return True
-    return False
+        if len(sub_topics.getSubTopics()) > 0 and json_object is not None:
+            process_product(json_object, sub_topics)
 
 
-def process_coverage_categories(xmind_parent_topic, risk_object):
-    coverage_categories = []
-    coverages = []
-
-    for sub_topic in xmind_parent_topic.getSubTopics():
-        if marker_exists(sub_topic.getMarkers(), Markers.clause_category):
-            coverage_category = dict()
-            coverage_category[JsonKeys.name.value] = sub_topic.getTitle()
-            coverage_category[JsonKeys.type.value] = Markers.clause_category.name
-            if sub_topic.getLabels():
-                coverage_category[JsonKeys.label.value] = ''.join(sub_topic.getLabels())
-            coverage_categories.append(coverage_category)
-
-            if len(sub_topic.getSubTopics()) > 0:
-                process_coverages(sub_topic, coverages)
-
-    risk_object[JsonKeys.coverage_category.value].append(coverage_categories)
-    risk_object[JsonKeys.coverages.value].append(coverages)
-
-
-def process_coverages(parent_topic, coverages: list):
-    for sub_topic in parent_topic.getSubTopics():
-        if marker_exists(sub_topic.getMarkers(), Markers.coverage):
-            coverage = dict()
-            coverage[JsonKeys.name.value] = sub_topic.getTitle()
-            coverage[JsonKeys.category.value] = parent_topic.getTitle()
-            coverage[JsonKeys.type.value] = Markers.coverage.name
-            coverages.append(coverage)
-
-
-def create_exposure_from_xmind_exposure(xmind_exposure):
-    exposure = dict()
-    # Basic Attributes
-    exposure[JsonKeys.name.value] = xmind_exposure.getTitle()
-    exposure[JsonKeys.type.value] = 'exposure'
-    if xmind_exposure.getLabels():
-        exposure[JsonKeys.label.value] = ''.join(xmind_exposure.getLabels())
-
-    exposure[JsonKeys.attributes.value] = []
-    # Now for the children
-    for xmind_exposure_child in xmind_exposure.getSubTopics():
-        for marker in xmind_exposure_child.getMarkers():
-            marker_id_str = str(marker.getMarkerId())
-            # We either have simple attributes
-            if marker_id_str in simpleAttributeLabels:
-                exposure[JsonKeys.attributes.value].append(
-                    create_attribute(
-                        xmind_exposure_child,
-                        get_json_type_from_xmind_marker_id_str(marker_id_str)))
-
-                # Create Dropdown attribute
-            elif marker_id_str == Markers.dropdown.value:
-                exposure[JsonKeys.attributes.value].append(create_dropdown_attribute(xmind_exposure_child))
-
-            # or we have further exposures
-            # then recursion
-            elif marker_id_str == Markers.exposure.value:
-                exposure[JsonKeys.attributes.value].append(create_exposure_from_xmind_exposure(xmind_exposure_child))
-
-    return exposure
-
-
-def create_dropdown_attribute(xmind_dropdown, category=None):
-    attribute_dropdown = dict()
-    attribute_dropdown[JsonKeys.name.value] = xmind_dropdown.getTitle()
-    attribute_dropdown[JsonKeys.type.value] = Markers.dropdown.name
-    if xmind_dropdown.getLabels():
-        attribute_dropdown[JsonKeys.label.value] = ''.join(xmind_dropdown.getLabels())
-    if category is not None:
-        attribute_dropdown[JsonKeys.attribute_category.value] = category
-    attribute_dropdown[JsonKeys.options.value] = []
-    # Now create the options
-    for xmind_option in xmind_dropdown.getSubTopics():
-        if check_valid_marker(xmind_option):
-            dd_option = dict()
-            dd_option[JsonKeys.name.value] = xmind_option.getTitle().strip()
-            dd_option[JsonKeys.type.value] = get_json_type_from_xmind_type(xmind_option)
-            if xmind_option.getLabels():
-                dd_option[JsonKeys.label.value] = ''.join(xmind_option.getLabels())
-            attribute_dropdown[JsonKeys.options.value].append(dd_option)
-
-    return attribute_dropdown
-
-
-def create_attribute(xmind_topic, attribute_type: Markers, category=None):
-    attribute = dict()
-    attribute[JsonKeys.name.value] = xmind_topic.getTitle().strip()
+def create_attribute(xmind_topic, attribute_type: Markers, json_object: XmindBase, category=None):
+    json_object.name = xmind_topic.getTitle().strip()
     if xmind_topic.getLabels():
-        attribute[JsonKeys.label.value] = ''.join(xmind_topic.getLabels())
+        json_object.label = ''.join(xmind_topic.getLabels())
     if category is not None:
-        attribute[JsonKeys.attribute_category.value] = category
+        json_object.category = category
 
-    attribute[JsonKeys.type.value] = attribute_type.name
-    if attribute_type == Markers.dropdown:
-        attribute[JsonKeys.options.value] = []
-    return attribute
+    json_object.json_type = attribute_type
 
 
 # Call method to print to CLI and file
-def output_json(risk_objects):
+def output_json(product):
     output_file_path = config.input_xmind_document.replace('.xmind', '.json')
-    json_map = {
-        JsonKeys.line.value: {
-            JsonKeys.attributes.value: [],
-            JsonKeys.attribute_category.value: [],
-            JsonKeys.coverage_category.value: []
-        },
-        JsonKeys.risk_objects.value: risk_objects
-    }
-    print(json.dumps(json_map))
+    json_dict = to_json(product)
+    json_string = json.dumps(json_dict)
     with open(output_file_path, "w") as json_file:
-        json.dump(json_map, json_file)
+        json_file.write(json_string)
 
 
-# UTIL METHODS
-# find marker in topic first, then return MARKERS key
-def get_json_type_from_xmind_type(xmind_topic) -> str:
-    json_type = ""
-    for marker in xmind_topic.getMarkers():
-        json_type = get_json_type_from_xmind_marker_id_str(str(marker.getMarkerId()))
-    return json_type
-
-
-# if you have the string representation of the marker id
-# find the key in the MARKERS map
-def get_json_type_from_xmind_marker_id_str(xmind_marker_id_str):
-    return Markers(xmind_marker_id_str).name
-
-
-def marker_exists(markers, marker: Markers):
-    """Test for the existence of a given marker"""
-    for test_marker in markers:
-        if str(test_marker.getMarkerId()) == marker.value:
-            return True
-    return False
-
-
-def find_marker(token_markers) -> Markers:
+def find_marker(token_markers):
     """Identifies the first marker that is defined as a marker for the mind map
 
     The function will ignore any markers that are not used by APD and will only
@@ -258,8 +115,158 @@ def find_marker(token_markers) -> Markers:
     return None
 
 
-def has_subtopics(token) -> bool:
-    if len(token.getSubTopics()) > 0:
-        return True
-    else:
-        return False
+def to_json(xmind_class: XmindBase):
+    item_dict = dict()
+    xmind_lines = []
+    xmind_risk_objects = []
+    for line in xmind_class.lines:
+        line, risk_objects = line_to_json(line)
+        xmind_lines.append(line)
+        xmind_risk_objects += risk_objects
+
+    item_dict[JsonKeys.line.value] = xmind_lines
+    item_dict[JsonKeys.risk_objects.value] = xmind_risk_objects
+    return item_dict
+
+
+def attribute_category_to_json(attribute_category: XmindBase):
+    item_dict = dict()
+    item_attributes = []
+    item_dict[JsonKeys.name.value] = attribute_category.name
+    item_dict[JsonKeys.type.value] = attribute_category.json_type.name
+    for attribute in attribute_category.attributes:
+        item_attributes.append(attribute_to_json(attribute, attribute_category.name))
+    return item_dict, item_attributes
+
+
+def coverage_category_to_json(coverage_category: XmindBase):
+    item_dict = dict()
+    item_coverages = []
+    item_dict[JsonKeys.name.value] = coverage_category.name
+    item_dict[JsonKeys.type.value] = coverage_category.json_type.name
+    for coverages in coverage_category.coverages:
+        item_coverages.append(coverage_to_json(coverages, coverage_category.name))
+    return item_dict, item_coverages
+
+
+def coverage_to_json(coverage: XmindBase, category=None) -> dict:
+    item_dict = dict()
+    json_terms = []
+    json_attributes = []
+
+    item_dict[JsonKeys.name.value] = coverage.name
+    item_dict[JsonKeys.type.value] = coverage.json_type.name
+
+    if len(coverage.label) > 0:
+        item_dict[JsonKeys.label.value] = coverage.label
+    if category is not None:
+        item_dict[JsonKeys.category.value] = category
+
+    for term in coverage.terms:
+        json_terms.append(attribute_to_json(term))
+
+    for attribute_item in coverage.attributes:
+        json_attributes.append(attribute_to_json(attribute_item))
+
+    if len(json_terms) > 0:
+        item_dict[JsonKeys.terms.value] = json_terms
+    if len(json_attributes) > 0:
+        item_dict[JsonKeys.attributes.value] = json_attributes
+
+    return item_dict
+
+
+def attribute_to_json(attribute: XmindBase, category=None) -> dict:
+    item_dict = dict()
+    json_options = []
+    json_attributes = []
+    item_dict[JsonKeys.name.value] = attribute.name
+    item_dict[JsonKeys.type.value] = attribute.json_type.name
+
+    if len(attribute.label) > 0:
+        item_dict[JsonKeys.label.value] = attribute.label
+    if category is not None:
+        item_dict[JsonKeys.category.value] = category
+
+    for option in attribute.options:
+        json_options.append(attribute_to_json(option))
+
+    for attribute_item in attribute.attributes:
+        json_attributes.append(attribute_to_json(attribute_item))
+
+    if len(json_options) > 0:
+        item_dict[JsonKeys.options.value] = json_options
+    if len(json_attributes) > 0:
+        item_dict[JsonKeys.attributes.value] = json_attributes
+
+    return item_dict
+
+
+def risk_object_to_json(risk_object: XmindBase) -> dict:
+    item_dict = dict()
+    json_coverage_categories = []
+    json_attribute_categories = []
+    json_attributes = []
+    json_coverages = []
+
+    item_dict[JsonKeys.name.value] = risk_object.name
+    item_dict[JsonKeys.type.value] = risk_object.json_type.name
+
+    if len(risk_object.label) > 0:
+        item_dict[JsonKeys.label.value] = risk_object.label
+
+    for attribute in risk_object.attributes:
+        json_attributes.append(attribute_to_json(attribute))
+
+    for attribute_category in risk_object.attribute_categories:
+        categories, attributes = attribute_category_to_json(attribute_category)
+        json_attribute_categories.append(categories)
+        json_attributes += attributes
+
+    for coverage_category in risk_object.coverage_categories:
+        categories, coverages = coverage_category_to_json(coverage_category)
+        json_coverage_categories.append(categories)
+        json_coverages += coverages
+
+    item_dict[JsonKeys.attribute_category.value] = json_attribute_categories
+    item_dict[JsonKeys.coverage_category.value] = json_coverage_categories
+    item_dict[JsonKeys.attributes.value] = json_attributes
+    item_dict[JsonKeys.coverages.value] = json_coverages
+
+    return item_dict
+
+
+def option_to_json():
+    ...
+
+
+def line_to_json(line: XmindBase):
+    item_dict = dict()
+    json_attribute_categories = []
+    json_coverage_categories = []
+    json_attributes = []
+    json_coverages = []
+    json_risk_objects = []
+
+    for attribute_category in line.attribute_categories:
+        categories, attributes = attribute_category_to_json(attribute_category)
+        json_attribute_categories.append(categories)
+        json_attributes += attributes
+
+    for coverage_category in line.coverage_categories:
+        categories, coverages = coverage_category_to_json(coverage_category)
+        json_coverage_categories.append(categories)
+        json_coverages += coverages
+
+    for attribute in line.attributes:
+        json_attributes.append(attribute_to_json(attribute))
+
+    for risk_object in line.risk_objects:
+        json_risk_objects.append(risk_object_to_json(risk_object))
+
+    item_dict[JsonKeys.attribute_category.value] = json_attribute_categories
+    item_dict[JsonKeys.coverage_category.value] = json_coverage_categories
+    item_dict[JsonKeys.attributes.value] = json_attributes
+    item_dict[JsonKeys.coverages.value] = json_coverages
+
+    return item_dict, json_risk_objects

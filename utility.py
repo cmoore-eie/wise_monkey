@@ -34,7 +34,8 @@ def attribute_no_category(attributes, topic, json_object):
     for attribute in attributes:
         if not (is_related(json_object, attribute['NAME'])):
             if JsonKeys.category.value not in attribute:
-                add_attribute(attribute, topic, json_object)
+                added_attribute = add_attribute(attribute, topic, json_object)
+                process_additional_attributes(attribute, added_attribute, json_object)
 
 
 def attribute_with_category(attributes, topic, json_object):
@@ -49,7 +50,8 @@ def attribute_with_category(attributes, topic, json_object):
         for attribute in attributes:
             if JsonKeys.category.value in attribute.keys():
                 if not (is_related(json_object, attribute['NAME'])):
-                    add_attribute(attribute, topic, json_object, question_category_topic)
+                    added_attribute = add_attribute(attribute, topic, json_object, question_category_topic)
+                    process_additional_attributes(attribute, added_attribute, json_object)
 
 
 def add_question_categories(topic, json_object) -> dict:
@@ -119,11 +121,19 @@ def process_dropdown_items(dropdown_data, item, attribute, json_object):
             if 'LABEL' in dropdown_value.keys():
                 item_option.addLabel(dropdown_value['LABEL'])
             extract_related(json_object, attribute['NAME'], dropdown_value['NAME'], item_option)
+            process_additional_attributes(dropdown_value, item_option, json_object)
+
         else:
             item_option = item.addSubTopic()
             item_option.setTitle(dropdown_value)
             item_option.addMarker(Markers.text.value)
             extract_related(json_object, attribute['NAME'], dropdown_value, item_option)
+
+
+def process_additional_attributes(existing_value, topic, json_object):
+    if JsonKeys.attributes.value in existing_value:
+        for additional_attribute in existing_value[JsonKeys.attributes.value]:
+            add_attribute(additional_attribute, topic, json_object)
 
 
 def add_attribute(attribute, topic, json_object, question_category_topic=None):
@@ -134,15 +144,15 @@ def add_attribute(attribute, topic, json_object, question_category_topic=None):
                 copy_topic = question_category_topic[attribute[JsonKeys.category.value]]
 
     item = copy_topic.addSubTopic()
-    item.setTitle(attribute['NAME'])
-    item.addMarker(Markers[attribute['TYPE']].value)
-    if 'LABEL' in attribute.keys():
-        item.addLabel(attribute['LABEL'])
+    item.setTitle(attribute[JsonKeys.name.value])
+    item.addMarker(Markers[attribute[JsonKeys.type.value]].value)
+    if JsonKeys.label.value in attribute.keys():
+        item.addLabel(attribute[JsonKeys.label.value])
     if JsonKeys.attributes.value in attribute.keys():
         for attribute_attribute in attribute[JsonKeys.attributes.value]:
             add_attribute(attribute_attribute, item, json_object)
 
-    if attribute['TYPE'] == 'dropdown':
+    if attribute[JsonKeys.type.value] == 'dropdown':
         add_dropdown(attribute, item, json_object)
     return item
 
@@ -163,7 +173,7 @@ def add_xmind_coverages(coverages, json_object, topic):
     if JsonKeys.coverage_category.value in json_object.keys():
         coverage_categories = add_coverage_categories(topic, json_object)
         for coverage in coverages:
-            if 'CATEGORY' in coverage:
+            if JsonKeys.category.value in coverage:
                 topic_to_use = coverage_categories[coverage['CATEGORY']]
             else:
                 topic_to_use = topic
@@ -174,18 +184,14 @@ def add_xmind_coverages(coverages, json_object, topic):
 
 def build_coverage(topic_to_use, coverage, json_object):
     new_coverage = topic_to_use.addSubTopic()
-    new_coverage.setTitle(coverage['NAME'])
+    new_coverage.setTitle(coverage[JsonKeys.name.value])
     new_coverage.addMarker(Markers.coverage.value)
-    if 'LABEL' in coverage.keys():
-        new_coverage.addLabel(coverage['LABEL'])
+    if JsonKeys.label.value in coverage.keys():
+        new_coverage.addLabel(coverage[JsonKeys.label.value])
 
-    if 'TERMS' in coverage.keys():
-        for term in coverage['TERMS']:
-            new_term = add_attribute(term, new_coverage, json_object)
-
-            if 'ATTRIBUTES' in term.keys():
-                for term_attribute in term['ATTRIBUTES']:
-                    add_attribute(term_attribute, new_term, json_object)
+    if JsonKeys.terms.value in coverage.keys():
+        for term in coverage[JsonKeys.terms.value]:
+            add_attribute(term, new_coverage, json_object)
 
 
 def extract_related(json_object, parent, link, topic):
@@ -194,9 +200,9 @@ def extract_related(json_object, parent, link, topic):
     related = json_object[JsonKeys.related.value]
     attributes = json_object[JsonKeys.attributes.value]
     for relationship in related:
-        if relationship['PARENT'] == parent and relationship['LINK'] == link:
+        if relationship[JsonKeys.parent.value] == parent and relationship[JsonKeys.link.value] == link:
             for attribute in attributes:
-                if attribute['NAME'] == relationship['CHILD']:
+                if attribute[JsonKeys.name.value] == relationship['CHILD']:
                     add_attribute(attribute, topic, json_object)
 
 

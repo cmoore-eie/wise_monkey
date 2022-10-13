@@ -57,9 +57,7 @@ def set_input_files():
     global input_document
     global input_xmind_document
     global process_type
-    if 'input_document' in config_dict[GeneralConstants.base_information.value].keys():
-        input_document = config_dict[GeneralConstants.base_information.value]['input_document']
-        process_type = ProcessType.to_xmind
+    process_type = ProcessType.to_xmind
     if 'input_xmind_document' in config_dict[GeneralConstants.base_information.value].keys():
         input_xmind_document = config_dict[GeneralConstants.base_information.value]['input_xmind_document']
         process_type = ProcessType.from_xmind

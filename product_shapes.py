@@ -18,10 +18,10 @@ def apply_shape(line, coverages=None):
     """
     for json_risk_object in config.shape_dict[JsonKeys.risk_objects.value]:
         risk_object = line.addSubTopic()
-        risk_object.setTitle(json_risk_object['NAME'])
-        risk_object.addMarker(Markers[json_risk_object['TYPE']].value)
-        if 'LABEL' in json_risk_object.keys():
-            risk_object.addLabel(json_risk_object['LABEL'])
+        risk_object.setTitle(json_risk_object[JsonKeys.name.value])
+        risk_object.addMarker(Markers[json_risk_object[JsonKeys.type.value]].value)
+        if JsonKeys.label.value in json_risk_object.keys():
+            risk_object.addLabel(json_risk_object[JsonKeys.label.value])
 
         risk_object_notes = risk_object.addSubTopic()
         risk_object_notes.setTitle("Notes")
@@ -48,7 +48,7 @@ def apply_shape(line, coverages=None):
         risk_object_conditions_category.setTitle("Standard Conditions")
         risk_object_conditions_category.addMarker(Markers.clause_category.value)
 
-        if JsonKeys.coverages.value in json_risk_object.keys() and coverages is None:
+        if JsonKeys.coverages.value in json_risk_object.keys() and (coverages is None or len(coverages) == 0):
             coverages = json_risk_object[JsonKeys.coverages.value]
 
         utility.add_xmind_coverages(coverages, json_risk_object, risk_object_coverage)
